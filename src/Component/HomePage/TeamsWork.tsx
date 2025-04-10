@@ -8,13 +8,16 @@ interface FeatureCardProps {
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title }) => (
-  <div className="flex items-start gap-6 bg-[#0A0A0A] rounded-2xl p-6 border border-[#154E4D]/20 hover:border-[#8CFFFD]/30 transition-colors duration-300">
+  <div className="flex items-center gap-6 bg-[#151515] rounded-2xl p-4 border hover:border-[#8CFFFD]/30 transition-colors duration-300">
     <div className="p-3 bg-[#154E4D] rounded-full">
       {icon}
     </div>
-    <p className="text-white text-lg font-light leading-relaxed">
+    {/* <p className="text-white text-lg font-light leading-relaxed">
       {title}
-    </p>
+    </p> */}
+    <Typography variant='body1' color='white'>
+    {title}
+            </Typography>
   </div>
 );
 
@@ -25,12 +28,18 @@ interface BenefitProps {
 
 const Benefit: React.FC<BenefitProps> = ({ title, description }) => (
   <div className="flex flex-col items-start">
-    <h3 className="text-[#8CFFFD] text-3xl lg:text-4xl font-light mb-4">
+    <Typography variant="h2" color="primary" className="mb-1">
+            {title}
+          </Typography>
+    {/* <h3 className="text-[#8CFFFD] text-3xl lg:text-4xl font-light mb-4">
       {title}
-    </h3>
-    <p className="text-white text-lg font-light leading-relaxed max-w-sm">
+    </h3> */}
+    {/* <p className="text-white text-lg font-light leading-relaxed max-w-72">
       {description}
-    </p>
+    </p> */}
+    <Typography variant='body1' color='white' className='max-w-72'>
+    {description}
+            </Typography>
   </div>
 );
 
@@ -94,11 +103,11 @@ const TeamsWork = () => {
   ];
 
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
+    <section className="py-16">
+      <div className="">
         {/* Teams Work Section */}
-        <div className="text-center mb-16">
-          <Typography variant="h2" color="primary" className="mb-4">
+        <div className="text-center mb-4">
+          <Typography variant="h2" color="primary" className="">
             Why Leading Teams Work With Us
           </Typography>
           <Typography variant="h3" color="white">
@@ -106,7 +115,7 @@ const TeamsWork = () => {
           </Typography>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full mx-4 mb-4">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -117,7 +126,7 @@ const TeamsWork = () => {
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-[#0A0A0A]/50 backdrop-blur-sm rounded-3xl border border-[#154E4D]/20 p-12 mb-20">
+        <div className="bg-[#101010]/80 backdrop-blur-sm rounded-3xl border border-white/20 mx-4 px-16 py-12 mb-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {benefits.map((benefit, index) => (
               <Benefit
@@ -130,10 +139,14 @@ const TeamsWork = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-[#8CFFFD] rounded-3xl py-16 px-8 text-center">
-          <h2 className="text-[#154E4D] text-3xl lg:text-4xl font-light mb-8 max-w-3xl mx-auto">
+        <div className="bg-[#7DDEDA] py-12 px-8 text-center">
+          {/* <h2 className="text-[#154E4D] text-3xl lg:text-4xl font-light mb-8 max-w-3xl mx-auto">
             Already building something big? Let's talk about how to get your data in sync
-          </h2>
+          </h2> */}
+          <Typography variant="h3" color='black' className='mb-4'>
+          Already building something big? Let's talk about how to get your data in sync
+          </Typography>
+
           <Button variant="secondary" className="text-lg">
             Talk to an Expert
           </Button>

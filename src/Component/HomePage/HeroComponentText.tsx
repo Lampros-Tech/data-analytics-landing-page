@@ -12,7 +12,7 @@ const HeroComponentText = () => {
         </Typography>
         </div>
         <div className='flex flex-col gap-4 flex-1 text-right max-w-[400px]'>
-            <Typography variant='h2' color='white'>
+            <Typography variant='h3' color='white'>
                 Your Data Is Talking. We Help You Listen, Learn, and Lead
             </Typography>
             <Typography variant='body1' color='gray'>

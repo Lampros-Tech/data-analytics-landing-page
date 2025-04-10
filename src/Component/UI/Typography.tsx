@@ -1,7 +1,7 @@
 import React, { JSX } from 'react';
 
 type VariantType = 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2' | 'caption';
-type ColorVariant = 'primary' | 'secondary' | 'white' | 'gray';
+type ColorVariant = 'primary' | 'secondary' | 'white' | 'gray' | 'black';
 
 interface TypographyProps {
   variant?: VariantType;
@@ -23,12 +23,13 @@ const Typography: React.FC<TypographyProps> = ({
     secondary: 'text-[#154E4D]',
     white: 'text-white',
     gray: 'text-gray-300',
+    black: 'text-black',
   };
 
   const variantStyles = {
-    h1: 'text-5xl lg:text-7xl font-light leading-tight',
-    h2: 'text-2xl lg:text-3xl font-medium leading-normal',
-    h3: 'text-xl lg:text-2xl font-medium leading-relaxed',
+    h1: 'text-6xl lg:text-7xl font-light leading-tight',
+    h2: 'text-4xl lg:text-5xl font-medium leading-normal',
+    h3: 'text-2xl lg:text-3xl font-medium leading-relaxed',
     h4: 'text-lg lg:text-xl font-medium leading-relaxed',
     body1: 'text-lg leading-relaxed',
     body2: 'text-base leading-relaxed',
