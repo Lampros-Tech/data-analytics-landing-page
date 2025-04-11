@@ -28,7 +28,7 @@ const Typography: React.FC<TypographyProps> = ({
 
   const variantStyles = {
     h1: 'text-6xl lg:text-7xl font-light leading-tight',
-    h2: 'text-4xl lg:text-5xl font-medium leading-normal',
+    h2: 'text-4xl lg:text-5xl font-light leading-normal',
     h3: 'text-2xl lg:text-3xl font-medium leading-relaxed',
     h4: 'text-lg lg:text-xl font-medium leading-relaxed',
     body1: 'text-lg leading-relaxed',

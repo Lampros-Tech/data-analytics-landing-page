@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Button from '@/Component/UI/button'
 import Image from 'next/image'
@@ -5,7 +6,6 @@ import component from '@/assets/images/Homepage/component.svg'
 import logo from '@/assets/images/Homepage/Logo.svg'
 import HeroComponentText from './HeroComponentText'
 import Header from './Header'
-import TeamsWork from './TeamsWork'
 
 const HomePage = () => {
   return (
@@ -27,7 +27,12 @@ const HomePage = () => {
       <div className="min-h-screen flex flex-col justify-center">
         <HeroComponentText />
         <div className='mt-8 ml-auto mr-8'>
-          <Button variant='primary' className='text-base'>BOOK A CALL</Button>
+          <Button 
+          variant='primary' 
+          className='text-base'
+          onClick={() => window.open('https://calendly.com/harshil_lamprostech/pick-mutual-availability', '_blank')}>
+            BOOK A CALL
+            </Button>
         </div>
       </div>
 

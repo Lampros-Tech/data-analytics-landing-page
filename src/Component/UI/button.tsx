@@ -15,10 +15,10 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   type = 'button',
 }) => {
-  const baseStyles = 'px-12 py-4 rounded-full font-medium transition-all duration-300 cursor-pointer';
+  const baseStyles = 'px-12 py-4 rounded-full font-medium transition-all duration-700 cursor-pointer';
   
   const variantStyles = {
-    primary: 'bg-[#DEF7F7] text-[#154E4D] hover:bg-[#154E4D] hover:text-[#DEF7F7]',
+    primary: 'bg-[#DEF7F7] text-[#154E4D] hover:bg-[#beefee] ',
     secondary: 'bg-[#154E4D] text-[#DEF7F7] hover:bg-[#DEF7F7] hover:text-[#154E4D]',
   };
 

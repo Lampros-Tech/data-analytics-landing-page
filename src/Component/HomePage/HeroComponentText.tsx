@@ -1,6 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-import logo from '@/assets/images/Homepage/Logo.svg'
 import Typography from '../UI/Typography'
 
 const HeroComponentText = () => {
