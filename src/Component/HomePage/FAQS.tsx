@@ -1,20 +1,18 @@
 "use client"
 import React, { useState } from 'react'
-import Typography from '../UI/Typography';
 import faqData from '../../data/faq';
+import styles from "../../styles/Homepage.module.css"
 
 const FAQS = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
     <section className="py-16 px-4 xl:px-28 bg-black text-white">
-      <Typography 
-        variant="h1" 
-        color='primary'
-        className='mb-6 ml-4'
+      <h1 
+        className={`${styles.league} mb-6 ml-4 text-[128px] text-[#7DDEDA] font-light`}
       >
         FAQs
-      </Typography>
+      </h1>
       <div className="flex flex-col max-w-full mx-auto gap-1.5">
         {faqData.map((faq) => (
           <div
@@ -25,30 +23,27 @@ const FAQS = () => {
             onMouseLeave={() => setHoveredId(null)}
           >
             <div className="flex items-center gap-16">
-              <Typography 
-                variant="body2" 
-                className="text-[#00FFF0] min-w-[2rem]"
+              <p  
+                className={`${styles.league} text-[32px] font-light min-w-[2rem]`}
               >
                 {faq.id}
-              </Typography>
-              <Typography 
-                variant="h4" 
-                className={`font-normal transition-colors duration-700 ease-in-out
+              </p>
+              <p 
+                className={`${styles.league} text-[32px] font-light transition-colors duration-700 ease-in-out
                   ${hoveredId === faq.id ? 'text-[#00FFF0]' : 'text-white'}`}
               >
                 {faq.question}
-              </Typography>
+              </p>
             </div>
             <div 
               className={`overflow-hidden transition-all duration-700 ease-in-out
                 ${hoveredId === faq.id ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}
             >
-              <Typography 
-                variant="body1" 
-                className="ml-24 text-white/80"
+              <p 
+                className={`${styles.raleway} text-[20px] ml-24 text-white/80`}
               >
                 {faq.answer}
-              </Typography>
+              </p>
             </div>
           </div>
         ))}

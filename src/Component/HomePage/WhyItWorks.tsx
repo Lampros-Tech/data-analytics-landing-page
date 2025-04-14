@@ -6,6 +6,7 @@ import Image, { StaticImageData } from 'next/image';
 import component from '@/assets/images/Homepage/RotateComponent.svg'
 import Dashboard from '@/assets/images/Homepage/Dashboard.svg'
 import whyItWorks from '@/data/whyitworks';
+import styles from "../../styles/Homepage.module.css"
 
 interface worksProps {
     icon: StaticImageData;
@@ -16,10 +17,9 @@ const WorksCard = ({ icon: Icon, title }: worksProps) => {
     return (
         <div className="flex items-center gap-6 bg-[#151515] rounded-2xl px-6 py-6 border hover:border-[#8CFFFD]/30 transition-colors duration-300">
             <div className="bg-[#7DDEDA] text-black rounded-full w-16 h-16 flex items-center justify-center min-w-[64px]">
-                {/* <Icon size={28} /> */}
                 <Image src={Icon} alt={title} width={42} height={42} className="object-contain"/>
             </div>
-            <Typography variant="body1" color="white">
+            <Typography variant="body1" color="white" className={`${styles.raleway}`}>
                 {title}
             </Typography>
         </div>
@@ -32,7 +32,7 @@ const WhyItWorks = () => {
         <>
             <div className='flex gap-2 mx-4 xl:mx-24'>
                 <div className='flex-1/3 bg-[#00695F] rounded-2xl flex flex-col justify-between items-center py-10 relative'>
-                    <Typography variant="h1" color="white" className='z-10'>
+                    <Typography variant="h1" color="white" className={`${styles.league} z-10`}>
                         Why It <br /> Works
                     </Typography>
                     <Button variant="primary" className='z-10'  onClick={() => window.open('https://calendly.com/harshil_lamprostech/pick-mutual-availability', '_blank')}>START YOUR ANALYTICS JOURNEY</Button>
@@ -52,10 +52,10 @@ const WhyItWorks = () => {
             </div>
             <div className='flex justify-between pt-16 pb-10 px-16 rounded-3xl bg-[#E4FFFE] mt-16 mx-4 xl:mx-24'>
                 <div className='flex-1'>
-                    <Typography variant='h2' color='secondary' className='mb-6 max-w-[450px]'>
+                    <Typography variant='h2' color='secondary' className={`mb-6 max-w-[450px] ${styles.league}`}>
                         Web3 Analytics Dashboards We&apos;ve Delivered
                     </Typography>
-                    <Typography variant='body1' color='black' className='max-w-[450px]'>
+                    <Typography variant='body1' color='black' className={`max-w-[450px] ${styles.raleway}`}>
                         Transaction Breackdown: Counting Non-vote and Vote Transaction, and Comparing Total Votes vs. Non-Votes Transactions on Solana
                     </Typography>
                 </div>

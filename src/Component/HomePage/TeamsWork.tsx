@@ -5,7 +5,7 @@ import Button from '../UI/button';
 import features from '@/data/features';
 import benefits from '@/data/benefits';
 import Image, { StaticImageData } from 'next/image';
-
+import styles from '../../styles/Homepage.module.css'
 interface FeatureCardProps {
   icon: StaticImageData;
   title: string;
@@ -16,7 +16,7 @@ const FeatureCard = ({ icon: Icon, title }: FeatureCardProps) => (
     <div className="p-3 bg-[#154E4D] rounded-full">
       <Image src={Icon} alt={title} width={24} height={24}/>
     </div>
-    <Typography variant='body1' color='white'>
+    <Typography variant='body1' color='white' className={`${styles.raleway}`}>
       {title}
     </Typography>
   </div>
@@ -29,10 +29,10 @@ interface BenefitProps {
 
 const Benefit: React.FC<BenefitProps> = ({ title, description }) => (
   <div className="flex flex-col items-start">
-    <Typography variant="h2" color="primary" className="mb-1">
+    <Typography variant="h2" color="primary" className={`mb-1 ${styles.league}`}>
       {title}
     </Typography>
-    <Typography variant='body1' color='white' className='max-w-72'>
+    <Typography variant='body1' color='white' className={`max-w-72 ${styles.raleway}`}>
       {description}
     </Typography>
   </div>
@@ -44,10 +44,10 @@ const TeamsWork = () => {
       <div className="">
         {/* Teams Work Section */}
         <div className="text-center mb-4">
-          <Typography variant="h2" color="primary" className="">
+          <Typography color="primary" className={`${styles.league} text-[64px]`}>
             Why Leading Teams Work With Us
           </Typography>
-          <Typography variant="h3" color="white">
+          <Typography variant="h5" color="white">
             Backed by
           </Typography>
         </div>
@@ -77,8 +77,8 @@ const TeamsWork = () => {
 
         {/* CTA Section */}
         <div className="bg-[#7DDEDA] py-12 px-8 text-center">
-          <Typography variant="h3" color='black' className='mb-4'>
-            Already building something big? Let&apos;s talk about how to get your data in sync
+          <Typography variant="h3" color='black' className={`${styles.league} mb-4`}>
+            Already building something big? Let&apos;s talk about how to get your data in sync.
           </Typography>
 
           <Button variant="secondary" className="text-lg" onClick={() => window.open('https://calendly.com/harshil_lamprostech/pick-mutual-availability', '_blank')}>

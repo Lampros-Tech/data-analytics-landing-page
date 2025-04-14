@@ -7,6 +7,7 @@ import logo from '@/assets/images/Homepage/logo2.svg'
 import footer from '@/assets/images/Homepage/footer.svg'
 import Button from '../UI/button';
 import socialLinks from '@/data/socialLinks';
+import styles from "../../styles/Homepage.module.css"
 
 // Constants
 const navigationLinks = [
@@ -20,14 +21,14 @@ const navigationLinks = [
 const HeroSection = () => (
   <div className="bg-[#00695F] text-white p-8 md:p-16 rounded-3xl flex gap-6 mx-4 xl:mx-28 mb-8">
     <div className="space-y-2 flex-1">
-      <Typography variant="h2" className="text-white">Make Smarter</Typography>
-      <Typography variant="h2" className="text-white">Moves With Web3</Typography>
-      <Typography variant="h2" className="text-white">Data Analytics</Typography>
+      <Typography variant="h2" className={`text-white ${styles.league}`}>Make Smarter</Typography>
+      <Typography variant="h2" className={`text-white ${styles.league}`}>Moves With Web3</Typography>
+      <Typography variant="h2" className={`text-white ${styles.league}`}>Data Analytics</Typography>
     </div>
     <div className='flex-1 flex flex-col justify-between pt-8'>
-      <Typography variant="body1" className="text-white/80 max-w-sm">
+      <p className={`text-white/80 max-w-[440px] ${styles.league} text-[32px] font-normal`}>
         Cut through noise. Track what matters. Actionable insights from blockchain data, delivered fast.
-      </Typography>
+      </p>
       <Button 
         variant='primary' 
         className='w-fit'
@@ -47,7 +48,7 @@ const NavigationLinks = () => (
         href={href} 
         target={href.startsWith('http') ? "_blank" : undefined}
         rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-        className="hover:font-bold transition-all duration-300"
+        className={`hover:font-bold transition-all duration-300 ${styles.raleway}`}
       >
         {label}
       </Link>
@@ -60,7 +61,7 @@ const CompanyDescription = () => (
     <Typography 
       variant="body1" 
       color='black' 
-      className='text-right max-w-lg mt-20 ml-auto'
+      className={`${styles.mavenPro} text-right max-w-lg mt-20 ml-auto`}
     >
       Lampros Tech is a leading Blockchain Development Company with highly skilled group of professionals. 
       Let us simplify blockchain and all-things Web 3.0 for you!
@@ -129,7 +130,7 @@ const Footer = () => {
       <footer className="w-full bg-[#DEF7F7] border-t border-teal-100 py-4">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
-            <Typography variant="body2" color='black'>
+            <Typography variant="body2" color='black' className={`${styles.mavenPro}`}>
               © {currentYear} Lampros Tech. All Rights Reserved.
             </Typography>
             <SocialLinks />

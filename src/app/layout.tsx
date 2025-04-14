@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { League_Spartan, Raleway } from "next/font/google";
+import { League_Spartan, Raleway, Maven_Pro } from "next/font/google";
 import "./globals.css";
 
-// const inter = Inter({ subsets: ["latin"] });
-
-// Initialize League Spartan font
 const leagueSpartan = League_Spartan({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-league-spartan",
 });
 
-// Initialize Raleway font
 const raleway = Raleway({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-raleway",
+});
+
+const mavenPro = Maven_Pro({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-maven-pro",
 });
 
 export const metadata: Metadata = {
@@ -29,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${leagueSpartan.variable} ${raleway.variable}`}>
-      <body className={`${leagueSpartan.className}`}>{children}</body>
+    <html lang="en" className={`${leagueSpartan.variable} ${raleway.variable} ${mavenPro.variable}`}>
+      <body className={`${leagueSpartan.variable} ${raleway.variable} ${mavenPro.variable}`}>{children}</body>
     </html>
   );
 }

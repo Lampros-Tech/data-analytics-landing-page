@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react';
+import styles from '../../styles/Homepage.module.css'
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState('Home');
@@ -70,12 +71,17 @@ const Header = () => {
   ];
 
   const handleNavClick = (item: NavItem) => {
+    if (!item.isDropdown) {
+      setIsAboutDropdownOpen(false);
+    }
+
     if (item.isDropdown) {
       setIsAboutDropdownOpen(!isAboutDropdownOpen);
-      setActiveTab('About');
+      setActiveTab(item.name);
+    } else if (item.external) {
+      setActiveTab('Home');
     } else {
       setActiveTab(item.name);
-      setIsAboutDropdownOpen(false);
     }
   };
 
@@ -95,17 +101,17 @@ const Header = () => {
         {navItems.map((item) => (
           <div 
             key={item.name} 
-            className="relative"
+            className="relative "
             ref={(el) => { tabRefs.current[item.name] = el; }}
           >
             {item.isDropdown ? (
               <div ref={dropdownRef} className="relative">
                 <button
                   onClick={() => handleNavClick(item)}
-                  className={`relative z-10 px-6 py-1.5 text-sm transition-colors duration-300 rounded-full ${
+                  className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full cursor-pointer ${styles.raleway} ${
                     activeTab === item.name
                       ? 'text-[#154E4D] font-medium'
-                      : 'text-white hover:text-[#7DDEDA]'
+                      : 'text-[#7DDEDA]'
                   }`}
                 >
                   {item.name}
@@ -120,7 +126,7 @@ const Header = () => {
                         href={dropdownItem.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block px-4 py-3 text-sm text-gray-300 hover:bg-[#7DDEDA]/10 hover:text-white transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl"
+                        className={`block px-4 py-3 text-base text-gray-300 hover:bg-[#7DDEDA]/10 hover:text-white transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl ${styles.raleway}`}
                       >
                         {dropdownItem.name}
                       </a>
@@ -134,10 +140,10 @@ const Header = () => {
                 onClick={() => handleNavClick(item)}
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
-                className={`relative z-10 px-6 py-1.5 text-sm transition-colors duration-300 rounded-full ${
+                className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${styles.raleway} ${
                   activeTab === item.name
                     ? 'text-[#154E4D] font-medium'
-                    : 'text-white hover:text-[#7DDEDA]'
+                    : 'text-[#7DDEDA]'
                 }`}
               >
                 {item.name}

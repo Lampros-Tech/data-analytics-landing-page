@@ -1,6 +1,7 @@
 import React from "react";
 import Typography from "../UI/Typography";
 import solutions from "@/data/solvingProblem";
+import styles from "../../styles/Homepage.module.css"
 
 interface solutionProps {
   title: string;
@@ -9,10 +10,10 @@ interface solutionProps {
 
 const SolutionCard: React.FC<solutionProps> = ({ title, description }) => (
   <div className="flex flex-col gap-2 bg-[#151515] rounded-lg py-6 px-16 border hover:border-[#8CFFFD]/30 transition-colors duration-300 text-left">
-    <Typography variant="h3" color="primary">
+    <Typography variant="h3" color="primary" className={`${styles.league}`}>
       {title}
     </Typography>
-    <Typography variant="body1" color="white">
+    <Typography variant="body1" color="white" className={`${styles.raleway}`}>
       {description}
     </Typography>
   </div>
@@ -22,7 +23,7 @@ const SolvingProblem = () => {
   return (
     <div>
       <div className="text-center mb-4">
-        <Typography variant="h2" color="primary" className="mb-4">
+        <Typography variant="h2" color="primary" className={`mb-4 ${styles.league}`}>
           Solving the Hardest Problems in <br /> Blockchain Data Analytics
         </Typography>
       </div>
