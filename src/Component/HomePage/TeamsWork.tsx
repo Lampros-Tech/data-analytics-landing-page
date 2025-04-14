@@ -4,16 +4,17 @@ import Typography from '../UI/Typography';
 import Button from '../UI/button';
 import features from '@/data/features';
 import benefits from '@/data/benefits';
+import Image, { StaticImageData } from 'next/image';
 
 interface FeatureCardProps {
-  icon: React.ElementType;
+  icon: StaticImageData;
   title: string;
 }
 
 const FeatureCard = ({ icon: Icon, title }: FeatureCardProps) => (
   <div className="flex items-center gap-6 bg-[#151515] rounded-2xl p-4 border hover:border-[#8CFFFD]/30 transition-colors duration-300">
     <div className="p-3 bg-[#154E4D] rounded-full">
-      <Icon size={24} className="text-[#8CFFFD]" />
+      <Image src={Icon} alt={title} width={24} height={24}/>
     </div>
     <Typography variant='body1' color='white'>
       {title}
@@ -31,12 +32,6 @@ const Benefit: React.FC<BenefitProps> = ({ title, description }) => (
     <Typography variant="h2" color="primary" className="mb-1">
       {title}
     </Typography>
-    {/* <h3 className="text-[#8CFFFD] text-3xl lg:text-4xl font-light mb-4">
-      {title}
-    </h3> */}
-    {/* <p className="text-white text-lg font-light leading-relaxed max-w-72">
-      {description}
-    </p> */}
     <Typography variant='body1' color='white' className='max-w-72'>
       {description}
     </Typography>
@@ -82,9 +77,6 @@ const TeamsWork = () => {
 
         {/* CTA Section */}
         <div className="bg-[#7DDEDA] py-12 px-8 text-center">
-          {/* <h2 className="text-[#154E4D] text-3xl lg:text-4xl font-light mb-8 max-w-3xl mx-auto">
-            Already building something big? Let's talk about how to get your data in sync
-          </h2> */}
           <Typography variant="h3" color='black' className='mb-4'>
             Already building something big? Let&apos;s talk about how to get your data in sync
           </Typography>

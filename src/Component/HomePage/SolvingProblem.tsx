@@ -26,7 +26,7 @@ const SolvingProblem = () => {
           Solving the Hardest Problems in <br /> Blockchain Data Analytics
         </Typography>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full mx-4 xl:mx-24 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full mx-4 xl:mx-24 mb-14">
         {solutions.map((solution, index) => (
           <SolutionCard
             key={index}

@@ -3,47 +3,38 @@ import React from 'react'
 import Typography from '../UI/Typography';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PiInstagramLogoFill } from "react-icons/pi";
 import logo from '@/assets/images/Homepage/logo2.svg'
 import footer from '@/assets/images/Homepage/footer.svg'
 import Button from '../UI/button';
+import socialLinks from '@/data/socialLinks';
 
 // Constants
 const navigationLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about-us', label: 'About Us' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact-us', label: 'Contact us' },
-];
-
-const socialLinks = [
-  { href: 'https://instagram.com', icon: <PiInstagramLogoFill className='text-[#154E4D]'/>, label: 'Instagram' },
-  { href: 'https://linkedin.com', icon: <PiInstagramLogoFill className='text-[#154E4D]'/>, label: 'LinkedIn' },
-  { href: 'https://twitter.com', icon: <PiInstagramLogoFill className='text-[#154E4D]'/>, label: 'Twitter' },
-  { href: 'https://behance.com', icon: <PiInstagramLogoFill className='text-[#154E4D]'/>, label: 'Behance' },
+  { href: 'https://lampros.tech/about-us/', label: 'About Us' },
+  { href: 'https://lampros.tech/blog/', label: 'Blog' },
+  { href: 'https://lampros.tech/contactus/', label: 'Contact us' },
 ];
 
 // Components
 const HeroSection = () => (
-  <div className="bg-[#00695F] text-white p-8 md:p-16 rounded-3xl flex gap-6 mx-4 xl:mx-28 mb-16">
+  <div className="bg-[#00695F] text-white p-8 md:p-16 rounded-3xl flex gap-6 mx-4 xl:mx-28 mb-8">
     <div className="space-y-2 flex-1">
       <Typography variant="h2" className="text-white">Make Smarter</Typography>
       <Typography variant="h2" className="text-white">Moves With Web3</Typography>
       <Typography variant="h2" className="text-white">Data Analytics</Typography>
     </div>
     <div className='flex-1 flex flex-col justify-between pt-8'>
-
-    <Typography variant="body1" className="text-white/80 max-w-sm">
-      Cut through noise. Track what matters. Actionable insights from blockchain data, delivered fast.
-    </Typography>
-
-    <Button 
-      variant='primary' 
-      className='w-fit'
-      onClick={() => window.open('https://calendly.com/harshil_lamprostech/pick-mutual-availability', '_blank')}
-    >
-      BOOK A CALL
-    </Button>
+      <Typography variant="body1" className="text-white/80 max-w-sm">
+        Cut through noise. Track what matters. Actionable insights from blockchain data, delivered fast.
+      </Typography>
+      <Button 
+        variant='primary' 
+        className='w-fit'
+        onClick={() => window.open('https://calendly.com/harshil_lamprostech/pick-mutual-availability', '_blank')}
+      >
+        BOOK A CALL
+      </Button>
     </div>
   </div>
 );
@@ -54,6 +45,8 @@ const NavigationLinks = () => (
       <Link 
         key={href} 
         href={href} 
+        target={href.startsWith('http') ? "_blank" : undefined}
+        rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
         className="hover:font-bold transition-all duration-300"
       >
         {label}
@@ -77,16 +70,22 @@ const CompanyDescription = () => (
 
 const SocialLinks = () => (
   <div className="flex items-center gap-3">
-    {socialLinks.map(({ href, icon, label }) => (
+    {socialLinks.map((item) => (
       <Link 
-        key={href} 
-        href={href} 
+        key={item.href} 
+        href={item.href} 
         target="_blank" 
         rel="noopener noreferrer"
-        aria-label={label}
-        className='rounded-full p-2 bg-[#E4FFFE] border border-[#3ACAC4] hover:bg-[#d0f7f5] transition-colors'
+        aria-label={item.name}
+        className='rounded-full p-2 bg-[#E4FFFE] border border-[#3ACAC4] hover:bg-[#d0f7f5] transition-colors flex items-center justify-center'
       >
-        {icon}
+        <Image 
+          src={item.icon} 
+          alt={item.name} 
+          width={20} 
+          height={20} 
+          className="w-5 h-5"
+        />
       </Link>
     ))}
   </div>

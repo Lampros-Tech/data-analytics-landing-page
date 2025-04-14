@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
+import { League_Spartan, Raleway } from "next/font/google";
 import "./globals.css";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
+// const inter = Inter({ subsets: ["latin"] });
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+// Initialize League Spartan font
+const leagueSpartan = League_Spartan({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-league-spartan",
+});
+
+// Initialize Raleway font
+const raleway = Raleway({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-raleway",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,12 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" className={`${leagueSpartan.variable} ${raleway.variable}`}>
+      <body className={`${leagueSpartan.className}`}>{children}</body>
     </html>
   );
 }

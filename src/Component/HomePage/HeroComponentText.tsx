@@ -3,7 +3,7 @@ import Typography from '../UI/Typography'
 
 const HeroComponentText = () => {
   return (
-    <div className='flex justify-between items-end ml-16 mr-8 mt-16'>
+    <div className='flex justify-between items-end ml-16 2xl:ml-40 mr-8 2xl:mr-24 mt-16'>
         <div className='flex-1'>
         <Typography variant='h1' color='primary'>
             Web3 Data <br/> Analytics For The <br/>Protocols Of <br/>Tomorrow
