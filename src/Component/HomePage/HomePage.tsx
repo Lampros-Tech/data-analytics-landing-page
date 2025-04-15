@@ -9,8 +9,8 @@ import Header from './Header'
 
 const HomePage = () => {
   return (
-    <main className="relative min-h-screen bg-[#101010] mx-4 rounded-2xl">
-      <div className="absolute top-5 left-4 z-10">
+    <main className="relative min-h-screen bg-[#101010] 3xl:max-w-[1600px] 3xl:mx-auto mx-4 rounded-2xl">
+      <div className="absolute top-5 left-16 z-10">
         <Image src={logo} alt="logo" className="w-60" />
       </div>
 

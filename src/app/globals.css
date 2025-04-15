@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+
+@theme {
+    --breakpoint-3xl: 1600px;
+    --font-raleway:  "Raleway", sans-serif;
+    --font-leaguespartan: "League Spartan", sans-serif;
+    --font-mavenpro: "Maven Pro", sans-serif;
+  }

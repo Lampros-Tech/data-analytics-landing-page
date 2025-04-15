@@ -5,7 +5,6 @@ import Button from '../UI/button';
 import features from '@/data/features';
 import benefits from '@/data/benefits';
 import Image, { StaticImageData } from 'next/image';
-import styles from '../../styles/Homepage.module.css'
 interface FeatureCardProps {
   icon: StaticImageData;
   title: string;
@@ -16,7 +15,7 @@ const FeatureCard = ({ icon: Icon, title }: FeatureCardProps) => (
     <div className="p-3 bg-[#154E4D] rounded-full">
       <Image src={Icon} alt={title} width={24} height={24}/>
     </div>
-    <Typography variant='body1' color='white' className={`${styles.raleway}`}>
+    <Typography variant='body1' color='white' className={`font-raleway`}>
       {title}
     </Typography>
   </div>
@@ -29,10 +28,10 @@ interface BenefitProps {
 
 const Benefit: React.FC<BenefitProps> = ({ title, description }) => (
   <div className="flex flex-col items-start">
-    <Typography variant="h2" color="primary" className={`mb-1 ${styles.league}`}>
+    <Typography variant="h2" color="primary" className={`font-leaguespartan`}>
       {title}
     </Typography>
-    <Typography variant='body1' color='white' className={`max-w-72 ${styles.raleway}`}>
+    <Typography variant='body1' color='white' className={`max-w-72 font-raleway`}>
       {description}
     </Typography>
   </div>
@@ -44,15 +43,15 @@ const TeamsWork = () => {
       <div className="">
         {/* Teams Work Section */}
         <div className="text-center mb-4">
-          <Typography color="primary" className={`${styles.league} text-[64px]`}>
+          <Typography color="primary" variant="h2" className={`font-leaguespartan`}>
             Why Leading Teams Work With Us
           </Typography>
-          <Typography variant="h5" color="white">
+          <Typography variant="h5" color="white" className='font-leaguespartan'>
             Backed by
           </Typography>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full mx-4 xl:mx-24 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full 3xl:max-w-[1600px] 3xl:mx-auto mx-4 mb-4">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -63,7 +62,7 @@ const TeamsWork = () => {
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-[#101010]/80 backdrop-blur-sm rounded-3xl border border-white/20 mx-4 xl:mx-24 px-16 py-12 mb-4">
+        <div className="bg-[#101010]/80 backdrop-blur-sm rounded-3xl border border-white/20 mx-4 3xl:max-w-[1600px] 3xl:mx-auto px-16 py-12 mb-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {benefits.map((benefit, index) => (
               <Benefit
@@ -77,7 +76,7 @@ const TeamsWork = () => {
 
         {/* CTA Section */}
         <div className="bg-[#7DDEDA] py-12 px-8 text-center">
-          <Typography variant="h3" color='black' className={`${styles.league} mb-4`}>
+          <Typography variant="h4" color='black' className={`font-leaguespartan mb-4`}>
             Already building something big? Let&apos;s talk about how to get your data in sync.
           </Typography>
 

@@ -3,14 +3,14 @@ import Typography from '../UI/Typography'
 import styles from '../../styles/Homepage.module.css'
 const HeroComponentText = () => {
   return (
-    <div className='flex justify-between items-end mx-8 mt-16'>
+    <div className='flex justify-between items-end ml-16 mr-8 mt-16'>
         <div className='flex-1'>
         <Typography variant='h1' color='primary' className={`${styles.league}`}>
             Web3 Data <br/> Analytics For The <br/>Protocols Of <br/>Tomorrow
         </Typography>
         </div>
-        <div className='flex flex-col gap-4 flex-1 text-right max-w-[590px]'>
-            <Typography variant='h3' color='white' className={`${styles.league}`}>
+        <div className='flex flex-col gap-4 flex-1 text-right max-w-[450px]'>
+            <Typography variant='h4' color='white' className={`${styles.league}`}>
                 Your Data Is Talking. We Help You Listen, Learn, and Lead
             </Typography>
             <Typography variant='body1' color='gray' className={`${styles.raleway}`}>
