@@ -28,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       className={`${baseStyles} ${variantStyles[variant]} ${className}`}
     >
-      {children}
+      <span className='flex justify-center items-center mt-1'>{children}</span>
     </button>
   );
 };

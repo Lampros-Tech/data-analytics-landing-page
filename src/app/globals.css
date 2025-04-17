@@ -1,9 +1,20 @@
 @import "tailwindcss";
 
-
 @theme {
-    --breakpoint-3xl: 1600px;
-    --font-raleway:  "Raleway", sans-serif;
-    --font-leaguespartan: "League Spartan", sans-serif;
-    --font-mavenpro: "Maven Pro", sans-serif;
-  }
+  --breakpoint-3xl: 1600px;
+  --breakpoint-1xl: 1400px;
+  --font-raleway: "Raleway", sans-serif;
+  --font-leaguespartan: "League Spartan", sans-serif;
+  --font-mavenpro: "Maven Pro", sans-serif;
+}
+
+/* Add this to your globals.css file */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0 1000px #151515 inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: white;
+}

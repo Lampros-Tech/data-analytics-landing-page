@@ -28,7 +28,7 @@ interface BenefitProps {
 
 const Benefit: React.FC<BenefitProps> = ({ title, description }) => (
   <div className="flex flex-col items-start">
-    <Typography variant="h2" color="primary" className={`font-leaguespartan`}>
+    <Typography variant="h2" color="primary" className={`font-leaguespartan tracking-tight`}>
       {title}
     </Typography>
     <Typography variant='body1' color='white' className={`max-w-72 font-raleway`}>
@@ -62,8 +62,8 @@ const TeamsWork = () => {
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-[#101010]/80 backdrop-blur-sm rounded-3xl border border-white/20 mx-4 3xl:max-w-[1600px] 3xl:mx-auto px-16 py-12 mb-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="bg-[#101010]/80 backdrop-blur-sm rounded-3xl border border-white/20 mx-4 3xl:max-w-[1600px] 3xl:mx-auto px-20 py-12 mb-4">
+          <div className="flex justify-between">
             {benefits.map((benefit, index) => (
               <Benefit
                 key={index}
