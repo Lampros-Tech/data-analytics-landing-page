@@ -25,6 +25,7 @@ const Header = () => {
     isDropdown?: boolean;
     external?: boolean;
     dropdownItems?: DropdownItem[];
+    scrollTo?: string;
   }
 
   useEffect(() => {
@@ -95,12 +96,24 @@ const Header = () => {
     },
     {
       name: "Contact Us",
-      href: "https://lampros.tech/contactus/",
-      external: true,
+      href: "#contactSection",
+      scrollTo: "contactSection"
     },
   ];
 
   const handleNavClick = (item: NavItem) => {
+    if (item.scrollTo && event) {
+      event.preventDefault();
+      
+      const element = document.getElementById(item.scrollTo);
+      if (element) {
+        // Smooth scroll to the element
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      
+      setActiveTab(item.name);
+      return;
+    }
     if (!item.isDropdown) {
       setIsAboutDropdownOpen(false);
     }

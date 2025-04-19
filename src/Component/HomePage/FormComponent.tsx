@@ -31,7 +31,7 @@ const FormComponent = () => {
   });
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -91,8 +91,8 @@ const FormComponent = () => {
   };
   return (
     <>
-      <div className="flex gap-4 mx-4 3xl:max-w-[1600px] 3xl:mx-auto">
-        <div className="rounded-2xl bg-[#00695F] p-8 flex-1/3 1xl:flex-1/4 relative">
+      <div id="contactSection" className="flex gap-4 mx-4 3xl:max-w-[1600px] 3xl:mx-auto">
+        <div className="rounded-2xl bg-[#00695F] px-10 py-16 flex-2/5 relative">
           <Typography
             variant="title"
             className="font-leaguespartan tracking-tight relative z-10 mb-3"
@@ -102,7 +102,7 @@ const FormComponent = () => {
           </Typography>
           <Typography
             variant="body1"
-            className="font-raleway relative z-10 max-w-[280px]"
+            className="font-raleway relative z-10 max-w-[370px]"
           >
             Drop us a line to enquire about our services for your new software
             launch or your latest software innovation. We&apos;ll get back to
@@ -111,12 +111,12 @@ const FormComponent = () => {
           <Image
             src={component}
             alt=""
-            width={180}
-            height={250}
-            className="top-0 right-0 absolute"
+            width={290}
+            // height={250}
+            className="top-0 right-0 absolute rounded-2xl w-[250px] 1xl:w-[290px]"
           />
         </div>
-        <div className="flex-2/3 1xl:flex-3/4 bg-[#151515] rounded-2xl p-8 md:p-12">
+        <div className="flex-3/5 bg-[#151515] rounded-2xl p-8 md:p-12">
           <form onSubmit={handleSubmit} className="flex flex-col gap-8">
             <div>
               <input
@@ -145,7 +145,7 @@ const FormComponent = () => {
             </div>
 
             <div>
-              <input
+              {/* <input
                 type="text"
                 id="contactNumber"
                 name="contactNumber"
@@ -154,6 +154,16 @@ const FormComponent = () => {
                 onChange={handleChange}
                 required
                 className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA]  text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-lg"
+              /> */}
+              <textarea
+                id="contactNumber"
+                name="contactNumber"
+                placeholder="What should we know before contacting you?"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                required
+                rows={1.5}
+                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA] text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-lg"
               />
             </div>
             {submitResult.status !== "idle" && submitResult.message && (
