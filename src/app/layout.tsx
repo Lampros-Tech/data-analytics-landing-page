@@ -49,11 +49,11 @@ export const metadata: Metadata = {
     siteName: "Lampros Tech",
     images: [
       {
-        url: "/OG.svg",
+        url: "/OG.png",
         width: 1200,
         height: 630,
         alt: "Lampros Tech Web3 Data Analytics Services OG Image",
-        type: "image/svg+xml",
+        type: "image/png",
       },
     ],
   },

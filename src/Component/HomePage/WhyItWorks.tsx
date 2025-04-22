@@ -55,7 +55,7 @@ const WhyItWorks = () => {
                         Web3 Analytics Dashboards We&apos;ve Delivered
                     </Typography>
                     <Typography variant='body1' color='black' className={`max-w-[450px] font-raleway`}>
-                        Transaction Breackdown: Counting Non-vote and Vote Transaction, and Comparing Total Votes vs. Non-Votes Transactions on Solana
+                        Transaction Breakdown: Counting Non-vote and Vote Transaction, and Comparing Total Votes vs. Non-Votes Transactions on Solana
                     </Typography>
                 </div>
                 <div className='flex-1'>

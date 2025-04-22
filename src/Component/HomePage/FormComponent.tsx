@@ -104,9 +104,7 @@ const FormComponent = () => {
             variant="body1"
             className="font-raleway relative z-10 max-w-[370px]"
           >
-            Drop us a line to enquire about our services for your new software
-            launch or your latest software innovation. We&apos;ll get back to
-            you within a business day.
+            Fill in the form to schedule a meeting with our data experts
           </Typography>
           <Image
             src={component}
