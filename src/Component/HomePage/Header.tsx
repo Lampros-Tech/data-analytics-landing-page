@@ -30,11 +30,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -88,32 +84,31 @@ const Header = () => {
         },
       ],
     },
-    { name: "Blog", href: "https://lampros.tech/blog/", external: true },
+    { name: "Blog", href: "/blog" }, // ✅ Updated to internal link
     {
       name: "Case Studies",
-      href: "https://lampros.tech/case-studies/",
-      external: true,
+      href: "/case-studies",
     },
     {
       name: "Contact Us",
       href: "#contactSection",
-      scrollTo: "contactSection"
+      scrollTo: "contactSection",
     },
   ];
 
-  const handleNavClick = (item: NavItem) => {
-    if (item.scrollTo && event) {
-      event.preventDefault();
-      
+  const handleNavClick = (item: NavItem, e?: React.MouseEvent) => {
+    if (item.scrollTo && e) {
+      e.preventDefault();
+
       const element = document.getElementById(item.scrollTo);
       if (element) {
-        // Smooth scroll to the element
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
-      
+
       setActiveTab(item.name);
       return;
     }
+
     if (!item.isDropdown) {
       setIsAboutDropdownOpen(false);
     }
@@ -193,12 +188,12 @@ const Header = () => {
                         </div>
                       )}
                     </div>
-                  ) : (
+                  ) : item.external ? (
                     <a
                       href={item.href}
-                      onClick={() => handleNavClick(item)}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noopener noreferrer" : undefined}
+                      onClick={(e) => handleNavClick(item, e)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${
                         styles.raleway
                       } ${
@@ -209,6 +204,20 @@ const Header = () => {
                     >
                       {item.name}
                     </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={(e) => handleNavClick(item, e)}
+                      className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${
+                        styles.raleway
+                      } ${
+                        activeTab === item.name
+                          ? "text-[#154E4D] font-medium"
+                          : "text-[#7DDEDA]"
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
                   )}
                 </div>
               ))}

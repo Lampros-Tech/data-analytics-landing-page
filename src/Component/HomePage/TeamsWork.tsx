@@ -46,9 +46,9 @@ const TeamsWork = () => {
           <Typography color="primary" variant="h2" className={`font-leaguespartan`}>
             Why Leading Teams Work With Us
           </Typography>
-          <Typography variant="h5" color="white" className='font-leaguespartan'>
+          {/* <Typography variant="h5" color="white" className='font-leaguespartan'>
             Backed by
-          </Typography>
+          </Typography> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full 3xl:max-w-[1600px] 3xl:mx-auto mx-4 mb-4">
