@@ -1,8 +1,7 @@
-// app/blog/[slug]/page.tsx
-
 import ClientSlug from "@/Component/Blog/ClientSlug";
 import { client } from "@/lib/sanity";
-// import { Metadata } from "next";
+import { PortableTextBlock } from "@portabletext/types";
+import { Metadata } from "next";
 
 interface Blog {
   _id: string;
@@ -23,7 +22,7 @@ interface Blog {
       url: string;
     };
   };
-  body: any[]; // you can refine this further based on your Sanity content model
+  body: PortableTextBlock[];
   headingPairs?: {
     h2Heading: string;
     displayHeading: string;
@@ -35,12 +34,6 @@ interface Blog {
       current: string;
     };
   }[];
-}
-
-interface Params {
-  params: {
-    slug: string;
-  };
 }
 
 async function getBlog(slug: string): Promise<Blog> {
@@ -81,43 +74,45 @@ async function getBlog(slug: string): Promise<Blog> {
       }
     }
   }`;
-
-  return client.fetch(query);
+  return client.fetch(query, { slug });
 }
 
-// ✅ Metadata generation
-// export async function generateMetadata({ params }: Params): Promise<Metadata> {
-//   const blog = await getBlog(params.slug);
+// Use the correct Next.js typing pattern - adapt to the expected Promise type
+// type PageProps = {
+//   params: Promise<{ slug: string }>;
+// };
 
-//   if (!blog) {
-//     return {
-//       title: "Blog Not Found",
-//       description: "The requested blog post could not be found.",
-//     };
-//   }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const blog = await getBlog(resolvedParams.slug);
+  if (!blog) {
+    return {
+      title: "Blog Not Found",
+      description: "The requested blog post could not be found.",
+    };
+  }
+  return {
+    title: blog.seoTitle || blog.title,
+    description: blog.metaDescription,
+    alternates: {
+      canonical: blog.canonicalUrl,
+    },
+    openGraph: {
+      title: blog.ogTitle || blog.title,
+      description: blog.ogDescription || blog.metaDescription,
+      url: blog.ogUrl || `https://www.triggerx.network/blog/${blog.slug.current}`,
+      images: blog.ogImage?.asset?.url
+        ? [{ url: blog.ogImage.asset.url }]
+        : [],
+      type: "article",
+      publishedTime: blog.publishedAt,
+    },
+  };
+}
 
-//   return {
-//     title: blog.seoTitle || blog.title,
-//     description: blog.metaDescription,
-//     alternates: {
-//       canonical: blog.canonicalUrl,
-//     },
-//     openGraph: {
-//       title: blog.ogTitle || blog.title,
-//       description: blog.ogDescription || blog.metaDescription,
-//       url: blog.ogUrl || `https://www.triggerx.network/blog/${blog.slug.current}`,
-//       images: blog.ogImage?.asset?.url
-//         ? [{ url: blog.ogImage.asset.url }]
-//         : [],
-//       type: "article",
-//       publishedTime: blog.publishedAt,
-//     },
-//   };
-// }
-
-// ✅ Blog page component
-export default async function BlogPost({ params }: Params) {
-  const blog = await getBlog(params.slug);
-
+// Component should use the same Promise<params> type
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const blog = await getBlog(resolvedParams.slug);
   return <ClientSlug blog={blog} />;
 }

@@ -22,14 +22,14 @@ interface Blog {
 }
 
 export default function ClientBlogList({ blogs }: { blogs: Blog[] }) {
-  const validBlogs = Array.isArray(blogs) ? blogs : [];
+  // const validBlogs = Array.isArray(blogs) ? blogs : [];
 
-  const sortedBlogs = [...validBlogs].sort(
-    (a, b) => new Date(b?.publishedAt || 0).getTime() - new Date(a?.publishedAt || 0).getTime()
-  );
+  // const sortedBlogs = [...validBlogs].sort(
+  //   (a, b) => new Date(b?.publishedAt || 0).getTime() - new Date(a?.publishedAt || 0).getTime()
+  // );
 
-  const mostRecentBlog = sortedBlogs[0];
-  const otherBlogs = sortedBlogs.slice(1);
+  // const mostRecentBlog = sortedBlogs[0];
+  // const otherBlogs = sortedBlogs.slice(1);
 
   return (
     <>

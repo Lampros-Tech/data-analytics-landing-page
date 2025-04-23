@@ -80,7 +80,7 @@ const TeamsWork = () => {
             Already building something big? Let&apos;s talk about how to get your data in sync.
           </Typography>
 
-          <Button variant="secondary" className="text-lg" onClick={() => window.open('https://calendly.com/harshil_lamprostech/pick-mutual-availability', '_blank')}>
+          <Button variant="secondary" className="text-[20px]" onClick={() => window.open('https://calendly.com/harshil_lamprostech/pick-mutual-availability', '_blank')}>
             Talk to an Expert
           </Button>
         </div>
