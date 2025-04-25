@@ -5,6 +5,32 @@ import Header from "@/Component/HomePage/Header";
 import Head from "next/head";
 import { SearchProvider } from "@/app/context/SearchContext";
 import { client } from "@/lib/sanity";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog | Lampros Tech",
+  description:
+    "Stay up-to-date on the latest in web3. Lampros Tech’s blog covers Web3 analytics services, multi-chain development, decentralized security, and smart contracts.",
+  alternates: {
+    canonical: "https://dataanalytics.lampros.tech/blog",
+  },
+  openGraph: {
+    title: "Blog | Lampros Tech",
+    description:
+      "Stay up-to-date on the latest in web3. Lampros Tech’s blog covers Web3 analytics services, multi-chain development, decentralized security, and smart contracts.",
+    url: "https://dataanalytics.lampros.tech/blog",
+    type: "website",
+    // Uncomment when you have the OG image
+    images: [
+      {
+        url: "/BlogsOG.png",
+        width: 1200,
+        height: 630,
+        alt: "Lampros Tech Blog Cover",
+      },
+    ],
+  },
+};
 
 const query = `*[_type == "post"] | order(publishedAt desc) {
   title,
@@ -55,21 +81,20 @@ export default async function blogs() {
   return (
     <>
     <Head>
-    <title>Blog | Lampros Tech</title>
+    {/* <title>Blog | Lampros Tech</title>
         <meta
           name="description"
           content="Stay up-to-date on the latest in web3. Lampros Tech’s blog covers Web3 analytics services, multi-chain development, decentralized security, and smart contracts."
         />
         <link rel="canonical" href="https://dataanalytics.lampros.tech/blog" />
 
-        {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Blog | Lampros Tech" />
         <meta
           property="og:description"
           content="Stay up-to-date on the latest in web3. Lampros Tech’s blog covers Web3 analytics services, multi-chain development, decentralized security, and smart contracts."
         />
         <meta property="og:url" content="https://dataanalytics.lampros.tech/blog" />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="website" /> */}
         {/* Once you get an OG image from Sakshi/Bhavyata, uncomment this: */}
         {/* <meta property="og:image" content="https://dataanalytics.lampros.tech/path-to-og-image.jpg" /> */}
 

@@ -1,6 +1,31 @@
 import CaseStudyMain from '@/Component/CaseStudy/CaseStudyMain'
+import { Metadata } from 'next';
 import Head from 'next/head';
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: "LayerZero Growth Analysis | Web3 Data Analytics Services | Lampros Tech",
+  description:
+    "Discover how Lampros Tech analyzed 6M+ LayerZero users across 10 chains. Get actionable Web3 analytics to optimize your cross-chain strategy.",
+  alternates: {
+    canonical: "https://dataanalytics.lampros.tech/case-studies/layerzero-user-behavior-analytics",
+  },
+  openGraph: {
+    title: "LayerZero Growth Analysis | Web3 Data Analytics Services | Lampros Tech",
+    description:
+      "Discover how Lampros Tech analyzed 6M+ LayerZero users across 10 chains. Get actionable Web3 analytics to optimize your cross-chain strategy.",
+    url: "https://dataanalytics.lampros.tech/case-studies/layerzero-user-behavior-analytics",
+    type: "website",
+    images: [
+      {
+        url: "https://dataanalytics.lampros.tech/CaseStudyOG.png",
+        width: 1200,
+        height: 630,
+        alt: "LayerZero Growth Analysis Case Study by Lampros Tech",
+      },
+    ],
+  },
+};
 
 const page = () => {
   const schema = {
@@ -23,7 +48,7 @@ const page = () => {
   return (
     <>
      <Head>
-     <title>LayerZero Growth Analysis | Web3 Data Analytics Services | Lampros Tech</title>
+     {/* <title>LayerZero Growth Analysis | Web3 Data Analytics Services | Lampros Tech</title>
         <meta
           name="description"
           content="Discover how Lampros Tech analyzed 6M+ LayerZero users across 10 chains. Get actionable Web3 analytics to optimize your cross-chain strategy."
@@ -33,7 +58,6 @@ const page = () => {
           href="https://dataanalytics.lampros.tech/case-studies/layerzero-user-behavior-analytics"
         />
 
-        {/* Open Graph */}
         <meta property="og:title" content="LayerZero Growth Analysis | Web3 Data Analytics Services | Lampros Tech" />
         <meta
           property="og:description"
@@ -44,8 +68,22 @@ const page = () => {
           content="https://dataanalytics.lampros.tech/case-studies/layerzero-user-behavior-analytics"
         />
         <meta property="og:type" content="website" />
-        {/* Once Sakshi/Bhavyata provides an image: */}
-        {/* <meta property="og:image" content="https://dataanalytics.lampros.tech/path-to-og-image.jpg" /> */}
+        <meta 
+          property="og:image" 
+          content="https://dataanalytics.lampros.tech/CaseStudyOG.png" 
+        />
+        <meta 
+          property="og:image:width" 
+          content="1200" 
+        />
+        <meta 
+          property="og:image:height" 
+          content="630" 
+        />
+        <meta 
+          property="og:image:alt" 
+          content="LayerZero Growth Analysis Case Study by Lampros Tech" 
+        /> */}
 
         <script
           type="application/ld+json"
