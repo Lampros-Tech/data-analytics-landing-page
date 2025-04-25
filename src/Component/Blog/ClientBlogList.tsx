@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Typography from "../UI/Typography";
 import { MdArrowOutward } from "react-icons/md";
+import { useSearch } from "@/app/context/SearchContext";
+import { useEffect, useState } from "react";
 
 interface Blog {
   _id: string;
@@ -31,45 +33,32 @@ export default function ClientBlogList({ blogs }: { blogs: Blog[] }) {
   // const mostRecentBlog = sortedBlogs[0];
   // const otherBlogs = sortedBlogs.slice(1);
 
+  const { searchTerm } = useSearch();
+  const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>(blogs);
+
+  useEffect(() => {
+    if (!searchTerm.trim()) {
+      setFilteredBlogs(blogs);
+      return;
+    }
+
+    const searchTermLower = searchTerm.toLowerCase();
+    const filtered = blogs.filter(blog => 
+      blog.title.toLowerCase().includes(searchTermLower) ||
+      blog.metaDescription?.toLowerCase().includes(searchTermLower) ||
+      blog.ogDescription?.toLowerCase().includes(searchTermLower)
+    );
+    
+    setFilteredBlogs(filtered);
+  }, [searchTerm, blogs]);
   return (
     <>
-      {/* {mostRecentBlog && (
-        <Link href={`/blog/${mostRecentBlog.slug?.current}`}>
-          <div className="my-10 bg-[#0F0F0F] p-6 sm:p-9 md:p-14 lg:p-20 rounded-2xl flex flex-col md:flex-row items-start justify-between gap-4 md:gap-6 border border-[#5F5F5F] h-auto group">
-            <div className="w-full md:w-[47%]">
-              <p className="text-[#FBF197] text-xs sm:text-sm">
-                {new Date(mostRecentBlog.publishedAt).toLocaleDateString(
-                  "en-US",
-                  {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                  }
-                )}
-              </p>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sharpGrotesk font-light mt-4 leading-tight transform scale-y-[.8]">
-                {mostRecentBlog.title}
-              </h2>
-            </div>
-            <div className="w-full md:w-1/2">
-              <p className="text-[#B7B7B7] text-xs sm:text-sm">
-                [{mostRecentBlog.readTime} min read]
-              </p>
-              <p className="text-gray-300 mt-3 sm:mt-7 font-actayWide font-light text-xs sm:text-sm md:text-base">
-                {mostRecentBlog.ogDescription}
-              </p>
-              <p className="text-white text-xs sm:text-sm md:text-base mt-3 sm:mt-12 lg:mt-20 xl:mt-24 inline-block group-hover:underline">
-                Read ↗
-              </p>
-            </div>
-          </div>
-        </Link>
-      )} */}
+     
 
-      {blogs.length > 0 ? (
+      {filteredBlogs.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 mt-4">
-          {blogs.map((blog) => (
-            <>
+          {filteredBlogs.map((blog) => (
+            
             
             <Link
               href={`/blog/${blog.slug?.current}`}
@@ -126,7 +115,6 @@ export default function ClientBlogList({ blogs }: { blogs: Blog[] }) {
                 </time>
               </div>
             </Link>
-            </>
           ))}
         </div>
       ) : (

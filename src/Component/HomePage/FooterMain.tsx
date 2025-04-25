@@ -6,6 +6,7 @@ import Typography from '../UI/Typography';
 import styles from "../../styles/Homepage.module.css"
 import footer from '@/assets/images/Homepage/footer.svg'
 import socialLinks from '@/data/socialLinks';
+import FormComponent from './FormComponent';
 
 
 const navigationLinks = [
@@ -70,6 +71,9 @@ const FooterMain = () => {
     const currentYear = new Date().getFullYear();
   return (
     <>
+      <div className='mb-14'>
+        <FormComponent/>
+      </div>
        <section className="w-full bg-gradient-to-b from-[#DEF7F7] to-[#7DDEDA] py-10 relative">
         <div className="container mx-auto px-4 md:px-16">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">

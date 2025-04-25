@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { League_Spartan, Raleway, Maven_Pro } from "next/font/google";
 import "./globals.css";
-// import Ogimage from "../../public/OG.svg"
+import Script from "next/script";
 
 const leagueSpartan = League_Spartan({
   subsets: ["latin"],
@@ -69,9 +69,31 @@ export default function RootLayout({
       lang="en"
       className={`${leagueSpartan.variable} ${raleway.variable} ${mavenPro.variable}`}
     >
+      <head>
+        <Script
+          id="gtm-head"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-P2VXDDKP');
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${leagueSpartan.variable} ${raleway.variable} ${mavenPro.variable}`}
       >
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-P2VXDDKP"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
         {children}
       </body>
     </html>

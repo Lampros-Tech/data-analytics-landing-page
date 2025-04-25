@@ -1,5 +1,5 @@
-import {DocumentTextIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { DocumentTextIcon, ImageIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const postType = defineType({
   name: 'post',
@@ -91,13 +91,50 @@ export const postType = defineType({
       name: 'body',
       title: 'Body Content',
       type: 'array',
-      // of: [
-      //   { type: 'block' },
-      //   { type: 'youtubeEmbed' }, // YouTube section support
-      // ],
       of: [
         defineArrayMember({
           type: "block",
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'H1', value: 'h1' },
+            { title: 'H2', value: 'h2' },
+            { title: 'H3', value: 'h3' },
+            { title: 'H4', value: 'h4' },
+            { title: 'Quote', value: 'blockquote' },
+          ],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+              { title: 'Code', value: 'code' },
+            ],
+            annotations: [
+              {
+                title: 'URL',
+                name: 'link',
+                type: 'object',
+                fields: [
+                  {
+                    title: 'URL',
+                    name: 'href',
+                    type: 'url',
+                  },
+                ],
+              },
+            ],
+          },
+        }),
+        defineArrayMember({
+          type: 'image',
+          icon: ImageIcon,
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+            }
+          ]
         }),
         defineArrayMember({
           name: "youtube",
@@ -122,9 +159,142 @@ export const postType = defineType({
             },
           },
         }),
+        defineArrayMember({
+          name: 'table',
+          title: 'Table',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'rows',
+              title: 'Rows',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'cells',
+                      title: 'Cells',
+                      type: 'array',
+                      of: [{ type: 'string' }],
+                      validation: Rule => Rule.required().max(3).error('Maximum 3 columns allowed'),
+                    }),
+                  ],
+                  preview: {
+                    select: {
+                      cells: 'cells',
+                    },
+                    prepare({ cells }) {
+                      return {
+                        title: cells ? cells.join(' | ') : 'Empty Row',
+                      }
+                    },
+                  },
+                }),
+              ],
+            }),
+          ],
+          preview: {
+            select: {
+              rows: 'rows',
+            },
+            prepare({ rows }) {
+              const rowCount = rows?.length || 0;
+              return {
+                title: `📊 Table (${rowCount} rows)`,
+              };
+            },
+          },
+        }),
+        defineArrayMember({
+          name: 'codeBlock',
+          title: 'Code Block',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'code',
+              title: 'Code',
+              type: 'text',
+              validation: Rule => Rule.required(),
+            }),
+            defineField({
+              name: 'language',
+              title: 'Language',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'JavaScript', value: 'javascript' },
+                  { title: 'TypeScript', value: 'typescript' },
+                  { title: 'Python', value: 'python' },
+                  { title: 'Java', value: 'java' },
+                  { title: 'C++', value: 'cpp' },
+                  { title: 'HTML', value: 'html' },
+                  { title: 'CSS', value: 'css' },
+                  { title: 'SQL', value: 'sql' },
+                  { title: 'JSON', value: 'json' },
+                  { title: 'Markdown', value: 'markdown' },
+                ],
+              },
+              validation: Rule => Rule.required(),
+            }),
+            defineField({
+              name: 'filename',
+              title: 'Filename',
+              type: 'string',
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'filename',
+              subtitle: 'language',
+            },
+            prepare({ title, subtitle }) {
+              return {
+                title: title || 'Code Block',
+                subtitle: subtitle ? `Language: ${subtitle}` : 'Code Block',
+              };
+            },
+          },
+        }),
+        defineArrayMember({
+          name: 'blockquote',
+          title: 'Blockquote',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'text',
+              title: 'Quote Text',
+              type: 'text',
+              validation: Rule => Rule.required(),
+            }),
+            defineField({
+              name: 'author',
+              title: 'Author',
+              type: 'string',
+            }),
+            defineField({
+              name: 'source',
+              title: 'Source',
+              type: 'string',
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'text',
+              subtitle: 'author',
+            },
+            prepare({ title, subtitle }) {
+              return {
+                title: title ? title.substring(0, 50) + '...' : 'Blockquote',
+                subtitle: subtitle ? `By ${subtitle}` : 'Blockquote',
+              };
+            },
+          },
+        }),
       ],
       validation: Rule => Rule.required(),
     }),
+
     defineField({
       name: "headingPairs",
       title: "Heading Pairs",
@@ -153,28 +323,30 @@ export const postType = defineType({
             },
           },
         }),
-        defineArrayMember({
-          name: "blogReference",
-          title: "Blog Reference",
-          type: "object",
-          fields: [
-            defineField({
-              name: "post",
-              title: "Referenced Blog Post",
-              type: "reference",
-              to: [{ type: "post" }],
-            }),
-          ],
-          preview: {
-            select: {
-              title: "post.ogTitle",
-            },
-            prepare({ title }) {
-              return { title: `🔗 Blog Reference: ${title}` };
-            },
-          },
+
+      ],
+    }),
+
+    defineField({
+      name: "blogReference",
+      title: "Blog Reference",
+      type: "object",
+      fields: [
+        defineField({
+          name: "post", 
+          title: "Referenced Blog Post",
+          type: "reference",
+          to: [{ type: "post" }],
         }),
       ],
+      preview: {
+        select: {
+          title: "post.ogTitle",
+        },
+        prepare({ title }) {
+          return { title: `🔗 Blog Reference: ${title}` };
+        },
+      },
     }),
   ],
   preview: {
@@ -184,8 +356,8 @@ export const postType = defineType({
       media: 'mainImage',
     },
     prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+      const { author } = selection
+      return { ...selection, subtitle: author && `by ${author}` }
     },
   },
 })

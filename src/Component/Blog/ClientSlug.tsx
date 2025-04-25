@@ -9,6 +9,8 @@ import { LuDot } from "react-icons/lu";
 import FooterMain from "../HomePage/FooterMain";
 import Link from "next/link";
 import { PortableTextBlock } from "@portabletext/types";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // --- Type Definitions ---
 export type Blog = {
@@ -84,21 +86,93 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
               alt={value.alt || "Blog Image"}
               width={2500}
               height={2000}
-              className="rounded-2xl !relative w-full h-auto"
+              className="rounded-2xl !relative w-auto h-auto"
             />
           )}
         </div>
       ),
       youtube: ({ value }) => (
-        <div className="my-4 aspect-w-16 aspect-h-9">
+        <div className="my-4 relative w-full aspect-video">
           <iframe
-            className="w-full h-full rounded-lg"
+            className="absolute top-0 left-0 w-full h-full rounded-lg"
             src={`https://www.youtube.com/embed/${value?.url?.split("v=")[1]}`}
             title="YouTube video player"
             style={{ border: "none" }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
+        </div>
+      ),
+      blockquote: ({ value }) => (
+        <div className="my-8 border-l-4 border-[#7DDEDA] pl-6 py-2">
+          <blockquote className="text-lg italic text-[#B7B7B7] font-raleway">
+            {value.text}
+          </blockquote>
+          {(value.author || value.source) && (
+            <div className="mt-2 text-sm text-[#7DDEDA]">
+              {value.author && <span className="font-bold">{value.author}</span>}
+              {value.author && value.source && <span> — </span>}
+              {value.source && <span>{value.source}</span>}
+            </div>
+          )}
+        </div>
+      ),
+      codeBlock: ({ value }) => (
+        <div className="my-6">
+          {value.filename && (
+            <div className="bg-[#1E1E1E] text-[#7DDEDA] px-4 py-2 rounded-t-lg font-mono text-sm">
+              {value.filename}
+            </div>
+          )}
+          <SyntaxHighlighter
+            language={value.language}
+            style={vscDarkPlus}
+            className="rounded-lg !mt-0"
+            showLineNumbers
+          >
+            {value.code}
+          </SyntaxHighlighter>
+        </div>
+      ),
+      table: ({ value }) => (
+        <div className="overflow-x-auto my-6 w-[70%] border overflow-hidden border-[#7D7D7D] rounded-b-2xl rounded-t-2xl">
+          <table className="w-full overflow-hidden rounded-2xl border-collapse border border-[#7D7D7D] text-left font-leaguespartan text-white">
+            {value.rows && value.rows.length > 0 && (
+              <>
+                <thead className="bg-[#048C80] text-[24px]">
+                  <tr className="text-center">
+                    {value.rows[0].cells.map((cell: string, index: number) => (
+                      <th
+                        key={index}
+                        className="border border-[#7D7D7D] px-2 py-2 font-[400] text-center"
+                      >
+                        {cell}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {value.rows.slice(1).map((row: { cells: string[] }, rowIndex: number) => (
+                    <tr key={rowIndex} className="text-[18px] font-[300]">
+                      {row.cells.map((cell: string, cellIndex: number) => (
+                        <td
+                          key={cellIndex}
+                          className="border border-[#7D7D7D] px-6 py-4"
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            )}
+            {(!value.rows || value.rows.length === 0) && (
+              <tr>
+                <td className="px-6 py-4 text-center">No data available</td>
+              </tr>
+            )}
+          </table>
         </div>
       ),
     },
@@ -110,7 +184,9 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
       ),
       em: ({ children }) => <em className="italic">{children}</em>,
       code: ({ children }) => (
-        <code className="bg-gray-200 px-1 py-0.5 rounded">{children}</code>
+        <code className="bg-[#1E1E1E] text-[#7DDEDA] px-2 py-1 rounded font-mono text-sm">
+          {children}
+        </code>
       ),
       link: ({ value, children }) => (
         <a
@@ -125,10 +201,10 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
     },
     list: {
       bullet: ({ children }) => (
-        <ul className="list-disc pl-6 my-2">{children}</ul>
+        <ul className="list-disc pl-6 my-2 font-raleway font-[300] text-[18px] text-white">{children}</ul>
       ),
       number: ({ children }) => (
-        <ol className="list-decimal pl-6 my-2">{children}</ol>
+        <ol className="list-decimal pl-6 my-2 font-raleway font-[300] text-[18px] text-white">{children}</ol>
       ),
     },
     block: {
@@ -231,8 +307,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                 day: "2-digit",
                 year: "numeric",
               })}{" "}
-              {blog.readTime} <LuDot />
-              min read
+              <LuDot />{blog.readTime}  {" "}min read
             </div>
             <h1 className="font-leaguespartan font-[200] text-[72px] leading-[80px] text-[#7DDEDA] tracking-tighter text-center mt-4 mb-6">
               {blog.title}

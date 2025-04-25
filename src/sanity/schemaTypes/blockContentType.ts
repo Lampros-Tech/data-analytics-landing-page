@@ -31,7 +31,10 @@ export const blockContentType = defineType({
         {title: 'H4', value: 'h4'},
         {title: 'Quote', value: 'blockquote'},
       ],
-      lists: [{title: 'Bullet', value: 'bullet'}],
+      lists: [
+        {title: 'Bullet', value: 'bullet'},
+        {title: 'Number', value: 'number'},
+      ],
       // Marks let you mark up inline text in the Portable Text Editor
       marks: {
         // Decorators usually describe a single property – e.g. a typographic
@@ -39,6 +42,7 @@ export const blockContentType = defineType({
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
+          {title: 'Code', value: 'code'},
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -71,6 +75,56 @@ export const blockContentType = defineType({
           title: 'Alternative Text',
         }
       ]
+    }),
+    defineArrayMember({
+      name: 'codeBlock',
+      title: 'Code Block',
+      type: 'object',
+      fields: [
+        {
+          name: 'code',
+          title: 'Code',
+          type: 'text',
+          validation: Rule => Rule.required(),
+        },
+        {
+          name: 'language',
+          title: 'Language',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'JavaScript', value: 'javascript' },
+              { title: 'TypeScript', value: 'typescript' },
+              { title: 'Python', value: 'python' },
+              { title: 'Java', value: 'java' },
+              { title: 'C++', value: 'cpp' },
+              { title: 'HTML', value: 'html' },
+              { title: 'CSS', value: 'css' },
+              { title: 'SQL', value: 'sql' },
+              { title: 'JSON', value: 'json' },
+              { title: 'Markdown', value: 'markdown' },
+            ],
+          },
+          validation: Rule => Rule.required(),
+        },
+        {
+          name: 'filename',
+          title: 'Filename',
+          type: 'string',
+        },
+      ],
+      preview: {
+        select: {
+          title: 'filename',
+          subtitle: 'language',
+        },
+        prepare({ title, subtitle }) {
+          return {
+            title: title || 'Code Block',
+            subtitle: subtitle ? `Language: ${subtitle}` : 'Code Block',
+          };
+        },
+      },
     }),
   ],
 })
