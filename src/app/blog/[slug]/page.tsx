@@ -92,6 +92,9 @@ export async function generateMetadata({
     alternates: {
       canonical: blog.canonicalUrl,
     },
+    icons: {
+      icon: ["/logo.svg"],
+    },
     openGraph: {
       title: blog.ogTitle ,
       description: blog.ogDescription ,

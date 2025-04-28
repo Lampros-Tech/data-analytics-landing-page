@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://dataanalytics.lampros.tech/case-studies/layerzero-user-behavior-analytics",
   },
+  icons: {
+    icon: ["/logo.svg"],
+  },
   openGraph: {
     title: "LayerZero Growth Analysis | Web3 Data Analytics Services | Lampros Tech",
     description:

@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://dataanalytics.lampros.tech/blog",
   },
+  icons: {
+    icon: ["/logo.svg"],
+  },
   openGraph: {
     title: "Blog | Lampros Tech",
     description:
