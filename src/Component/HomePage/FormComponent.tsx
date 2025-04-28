@@ -91,14 +91,14 @@ const FormComponent = () => {
   };
   return (
     <>
-      <div id="contactSection" className="flex gap-4 mx-4 3xl:max-w-[1600px] 3xl:mx-auto">
-        <div className="rounded-2xl bg-[#00695F] px-10 py-16 flex-2/5 relative">
+      <div id="contactSection" className="flex flex-col md:flex-row gap-4 md:mx-4 mx-2 3xl:max-w-[1600px] 3xl:mx-auto">
+        <div className="rounded-2xl bg-[#00695F] px-6 lg:px-10 py-16 flex-2/5 relative">
           <Typography
             variant="title"
             className="font-leaguespartan tracking-tight relative z-10 mb-3"
           >
             Contact
-            <br /> Us
+            <br className="hidden md:block" /> Us
           </Typography>
           <Typography
             variant="body1"
@@ -125,7 +125,7 @@ const FormComponent = () => {
                 value={formData.yourName}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA]  text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-lg"
+                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA]  text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-base lg:text-lg"
               />
             </div>
 
@@ -138,21 +138,11 @@ const FormComponent = () => {
                 value={formData.emailAddress}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA]  text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-lg"
+                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA]  text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-base lg:text-lg"
               />
             </div>
 
             <div>
-              {/* <input
-                type="text"
-                id="contactNumber"
-                name="contactNumber"
-                placeholder="What should we know before contacting you?"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                required
-                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA]  text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-lg"
-              /> */}
               <textarea
                 id="contactNumber"
                 name="contactNumber"
@@ -161,16 +151,15 @@ const FormComponent = () => {
                 onChange={handleChange}
                 required
                 rows={1.5}
-                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA] text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-lg"
+                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-[#7DDEDA] text-white placeholder:text-gray-400 py-2 px-1 focus:outline-none focus:ring-0 transition duration-300 ease-in-out font-raleway text-base lg:text-lg"
               />
             </div>
             {submitResult.status !== "idle" && submitResult.message && (
               <div
-                className={`mt-4 text-sm ${
-                  submitResult.status === "success"
+                className={`mt-4 text-sm ${submitResult.status === "success"
                     ? "text-green-400"
                     : "text-red-400"
-                }`}
+                  }`}
               >
                 {submitResult.message}
               </div>
@@ -180,11 +169,10 @@ const FormComponent = () => {
               <Button
                 variant="primary"
                 type="submit"
-                className={`${
-                  submitResult.status === "loading"
+                className={`${submitResult.status === "loading"
                     ? "opacity-70 cursor-not-allowed"
                     : ""
-                }`}
+                  }`}
               >
                 {submitResult.status === "loading" ? "SENDING..." : "SUBMIT"}
               </Button>

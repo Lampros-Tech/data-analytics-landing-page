@@ -8,7 +8,7 @@ interface WorksCardProps {
 }
 
 const WorksCard = ({ title, description }: WorksCardProps) => (
-  <div className="flex flex-col bg-[#151515] rounded-2xl pt-12 pb-16 px-16 border border-white/20 hover:border-[#8CFFFD]/30 transition-colors duration-300">
+  <div className="flex flex-col bg-[#151515] rounded-2xl py-6 md:py-8 lg:pt-12 lg:pb-16 px-4 md:px-10 lg:px-16 border border-white/20 hover:border-[#8CFFFD]/30 transition-colors duration-300">
     <Typography variant="h6" color="primary" className={`font-leaguespartan`}>
       {title}
     </Typography>
@@ -21,7 +21,7 @@ const WorksCard = ({ title, description }: WorksCardProps) => (
 const Works = () => {
   return (
     <div>
-      <div className="rounded-xl bg-[#00695F] py-10 px-16 mx-4 3xl:max-w-[1600px] 3xl:mx-auto flex gap-8">
+      <div className="rounded-xl bg-[#00695F] py-8 md:py-10 px-4 md:px-16 mx-2 md:mx-4 3xl:max-w-[1600px] 3xl:mx-auto flex flex-col sm:flex-row md:gap-8 gap-6">
         <div className="flex-1">
           <Typography variant="h2" color="white" className={`max-w-xl font-leaguespartan tracking-tighter`}>
             How We Deliver Web3 Data Analytics That Actually Work
@@ -38,7 +38,7 @@ const Works = () => {
           </Typography>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-full mx-4 3xl:max-w-[1600px] 3xl:mx-auto mb-14 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-full mx-2 md:mx-4 3xl:max-w-[1600px] 3xl:mx-auto mb-14 mt-4">
         {works.map((work, index) => (
           <WorksCard
             key={index}

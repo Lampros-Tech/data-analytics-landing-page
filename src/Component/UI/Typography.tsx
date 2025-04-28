@@ -41,18 +41,18 @@ const Typography: React.FC<TypographyProps> = ({
   };
 
   const variantStyles = {
-    h1: "text-[6rem] font-[200] leading-[106px]",
-    h2: "text-[4rem] font-[300] leading-[70px]",
+    h1: "text-[2.875rem] text-[4rem] lg:text-[6rem] font-[200] md:leading-[106px]",
+    h2: "text-[2.875rem] md:text-[3.5rem] lg:text-[4rem] font-[300] leading-[50px] md:leading-[70px]",
     h3: "text-[3rem] font-[300]",
-    h4: "text-[2.5rem] font-[400]",
+    h4: "text-[2.25rem] md:text-[2.5rem] font-[400]",
     h5: "text-[1.5rem] font-[500]",
-    h6: "text-[2.25rem] font-[500]",
-    h7: "text-[2rem] font-[500]",
+    h6: "text-[1.5rem] md:text-[2.25rem] font-[500]",
+    h7: "text-[1.5rem] md:text-[2rem] font-[500]",
     h8: "text-[2.25rem] font-[400]",
-    body1: "text-[1.125rem] leading-relaxed",
-    body2: "text-[1.25rem] ",
+    body1: "text-[1rem] md:text-[1.05rem] lg:text-[1.125rem] leading-relaxed",
+    body2: "text-[0.875rem] md:text-[1.25rem] ",
     caption: "text-[0.875rem] leading-normal",
-    title: "text-[5rem] font-[300] leading-[80px]",
+    title: "text-[3.5rem] md:text-[5rem] font-[300] leading-[80px]",
     content: "text-[1.75rem] font-[300]",
     title2: "text-[5rem] font-[400]",
   };

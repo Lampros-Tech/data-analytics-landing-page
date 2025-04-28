@@ -5,6 +5,8 @@ import logo from "@/assets/images/Homepage/Logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
+import { HiMenu, HiX } from "react-icons/hi";
+import { RiMenu4Fill } from "react-icons/ri";
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState("Home");
@@ -16,6 +18,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   interface DropdownItem {
     name: string;
@@ -129,7 +132,7 @@ const Header = () => {
     // Special handling for Contact Us
     if (item.name === "Contact Us") {
       if (e) e.preventDefault();
-      
+
       if (pathname !== "/") {
         // If not on homepage, navigate to homepage first
         router.push("/");
@@ -139,7 +142,7 @@ const Header = () => {
         // If already on homepage, just scroll
         scrollToContactSection();
       }
-      
+
       // Always keep Home tab active when clicking Contact Us
       setActiveTab("Home");
       return;
@@ -170,22 +173,22 @@ const Header = () => {
   };
 
   return (
-    <div
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "py-2" : "py-5"
-      }`}
-    >
+    <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       <div className="mx-4 3xl:max-w-[1600px] 3xl:mx-auto">
-        <div
-          className={`flex items-center justify-center rounded-2xl ${
-            scrolled ? "bg-[#101010]/50 backdrop-blur-md" : "bg-transparent"
-          } px-6 py-3`}
-        >
+        <div className={`flex items-center justify-between rounded-2xl px-6 py-6 ${scrolled ? "bg-[#101010]/50 backdrop-blur-md" : "bg-transparent"
+          }`}>
           <Link href="/" onClick={() => setActiveTab("Home")} className="flex-shrink-0 w-fit">
             <Image src={logo} alt="logo" className="w-36 md:w-48" />
           </Link>
 
-          <div className="flex items-center w-full justify-center">
+          <button
+            className="xl:hidden p-2 rounded-md bg-[#154E4D]"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <RiMenu4Fill size={32} className="text-[#7DDEDA]" />
+          </button>
+
+          <div className="hidden xl:flex items-center w-full justify-center">
             <div className="relative -translate-x-[72px] md:-translate-x-[96px] flex items-center bg-[#154E4D] rounded-full p-2">
               <div
                 className="absolute h-[80%] transition-all duration-300 ease-in-out bg-[#7DDEDA] rounded-full"
@@ -207,13 +210,11 @@ const Header = () => {
                     <div ref={dropdownRef} className="relative">
                       <button
                         onClick={() => handleNavClick(item)}
-                        className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full cursor-pointer ${
-                          styles.raleway
-                        } ${
-                          activeTab === item.name
+                        className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full cursor-pointer ${styles.raleway
+                          } ${activeTab === item.name
                             ? "text-[#154E4D] font-medium"
                             : "text-[#7DDEDA]"
-                        }`}
+                          }`}
                       >
                         {item.name}
                       </button>
@@ -240,13 +241,11 @@ const Header = () => {
                       onClick={(e) => handleNavClick(item, e)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${
-                        styles.raleway
-                      } ${
-                        activeTab === item.name
+                      className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${styles.raleway
+                        } ${activeTab === item.name
                           ? "text-[#154E4D] font-medium"
                           : "text-[#7DDEDA]"
-                      }`}
+                        }`}
                     >
                       {item.name}
                     </a>
@@ -254,13 +253,11 @@ const Header = () => {
                     <Link
                       href={item.href}
                       onClick={(e) => handleNavClick(item, e)}
-                      className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${
-                        styles.raleway
-                      } ${
-                        activeTab === item.name
+                      className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${styles.raleway
+                        } ${activeTab === item.name
                           ? "text-[#154E4D] font-medium"
                           : "text-[#7DDEDA]"
-                      }`}
+                        }`}
                     >
                       {item.name}
                     </Link>
@@ -271,6 +268,108 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      {mobileMenuOpen && (
+        <div
+          className={`
+            fixed top-0 right-0 h-full w-80 max-w-[90vw] z-50
+            bg-[#154E4D] shadow-2xl
+            rounded-l-3xl
+            flex flex-col
+            transition-transform duration-300
+            ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}
+          `}
+          style={{ minWidth: 280 }}
+        >
+          {/* Close Button */}
+          <button
+            className="absolute top-5 right-5 p-2 rounded-full hover:bg-[#7DDEDA]/20 transition"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <HiX size={32} className="text-[#7DDEDA]" />
+          </button>
+
+          <nav className="flex flex-col gap-2 px-6 mt-20">
+            {navItems.map((item) => (
+              <div key={item.name} className="relative">
+                {item.isDropdown ? (
+                  <div ref={dropdownRef}>
+                    <button
+                      onClick={() => setIsAboutDropdownOpen((open) => !open)}
+                      className={`
+                        flex items-center justify-between w-full
+                        px-5 py-3 rounded-xl
+                        text-lg font-semibold
+                        transition
+                        ${styles.raleway}
+                        ${activeTab === item.name ? "bg-[#7DDEDA] text-[#154E4D]" : "text-[#7DDEDA] hover:bg-[#7DDEDA]/10"}
+                      `}
+                    >
+                      {item.name}
+                      <span className={`ml-2 transition-transform ${isAboutDropdownOpen ? "rotate-180" : ""}`}>
+                        ▼
+                      </span>
+                    </button>
+                    {/* Dropdown */}
+                    <div
+                      className={`
+                        transition-all duration-300 overflow-hidden
+                        ${isAboutDropdownOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}
+                      `}
+                    >
+                      {item.dropdownItems?.map((dropdownItem) => (
+                        <a
+                          key={dropdownItem.name}
+                          href={dropdownItem.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`
+                            block px-8 py-2 text-base text-[#7DDEDA] hover:bg-[#7DDEDA]/10 rounded-lg
+                            ${styles.raleway}
+                          `}
+                        >
+                          {dropdownItem.name}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : item.external ? (
+                  <a
+                    href={item.href}
+                    onClick={(e) => handleNavClick(item, e)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`
+                      block px-5 py-3 rounded-xl text-lg font-semibold
+                      transition
+                      ${styles.raleway}
+                      ${activeTab === item.name ? "bg-[#7DDEDA] text-[#154E4D]" : "text-[#7DDEDA] hover:bg-[#7DDEDA]/10"}
+                    `}
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={(e) => handleNavClick(item, e)}
+                    className={`
+                      block px-5 py-3 rounded-xl text-lg font-semibold
+                      transition
+                      ${styles.raleway}
+                      ${activeTab === item.name ? "bg-[#7DDEDA] text-[#154E4D]" : "text-[#7DDEDA] hover:bg-[#7DDEDA]/10"}
+                    `}
+                  >
+                    {item.name}
+                  </Link>
+                )}
+                {/* Divider */}
+                <div className="border-b border-[#7DDEDA]/20 last:border-none" />
+              </div>
+            ))}
+          </nav>
+        </div>
+      )}
     </div>
   );
 };
