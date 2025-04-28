@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://dataanalytics.lampros.tech/CaseStudyOG.png",
+        url: "/CaseStudyOG.png",
         width: 1200,
         height: 630,
         alt: "LayerZero Growth Analysis Case Study by Lampros Tech",

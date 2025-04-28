@@ -12,7 +12,7 @@ import FormComponent from './FormComponent';
 const navigationLinks = [
     { href: '/', label: 'Home' },
     { href: 'https://lampros.tech/about-us/', label: 'About Us' },
-    { href: 'https://lampros.tech/blog/', label: 'Blog' },
+    { href: '/blog', label: 'Blog' },
     { href: 'https://lampros.tech/contactus/', label: 'Contact us' },
   ];
 

@@ -8,7 +8,7 @@ import Footer from "@/Component/HomePage/Footer";
 import logo from "../../public/logo.svg";
 import { Metadata } from "next";
 
-const pageUrl = "https://data-analytics-landing-page-ten.vercel.app/";
+const pageUrl = "https://dataanalytics.lampros.tech";
 
 const schemaData = {
   "@context": "https://schema.org",

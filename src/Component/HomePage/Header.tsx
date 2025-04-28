@@ -80,12 +80,13 @@ const Header = () => {
 
   // Set initial active tab based on current path
   useEffect(() => {
-    if (pathname === "/") {
-      setActiveTab("Home");
-    } else if (pathname === "/blog") {
+    // Handle nested routes
+    if (pathname.startsWith("/blog")) {
       setActiveTab("Blog");
-    } else if (pathname === "/case-studies/layerzero-user-behavior-analytics") {
+    } else if (pathname.startsWith("/case-studies")) {
       setActiveTab("Case Studies");
+    } else if (pathname === "/") {
+      setActiveTab("Home");
     }
   }, [pathname]);
 
