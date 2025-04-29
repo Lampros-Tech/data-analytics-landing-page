@@ -178,7 +178,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
     },
     marks: {
       strong: ({ children }) => (
-        <strong className="font-bold text-[#7DDEDA] font-raleway">
+        <strong className="font-bold font-raleway">
           {children}
         </strong>
       ),
@@ -241,7 +241,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h3
             id={text}
-            className="font-leaguespartan text-sm sm:text-lg xl:text-xl 2xl:text-2xl font-[300] mt-4 text-[#7DDEDA]"
+            className="font-leaguespartan text-sm sm:text-lg xl:text-xl 2xl:text-2xl font-[300] mt-4 text-white"
           >
             {text}
           </h3>
@@ -254,7 +254,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h4
             id={text}
-            className="font-leaguespartan text-xs sm:text-sm xl:text-lg 2xl:text-xl font-[300] mt-4 text-[#7DDEDA]"
+            className="font-leaguespartan text-xs sm:text-sm xl:text-lg 2xl:text-xl font-[300] mt-4 text-white"
           >
             {text}
           </h4>
@@ -267,7 +267,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h5
             id={text}
-            className="font-leaguespartan text-[10px] sm:text-xs xl:text-sm 2xl:text-lg font-[300] mt-4 text-[#7DDEDA]"
+            className="font-leaguespartan text-[10px] sm:text-xs xl:text-sm 2xl:text-lg font-[300] mt-4 text-white"
           >
             {text}
           </h5>
@@ -278,12 +278,12 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
           ? (children[0] as string)
           : (children as string);
         return (
-          <h3
+          <h6
             id={text}
-            className="font-leaguespartan text-[10px] sm:text-xs xl:text-sm 2xl:text-lg font-[300] mt-4 text-[#7DDEDA]"
+            className="font-leaguespartan text-[10px] sm:text-xs xl:text-sm 2xl:text-lg font-[300] mt-4 text-white"
           >
             {text}
-          </h3>
+          </h6>
         );
       },
       normal: ({ children }) => (
@@ -313,12 +313,14 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
               {blog.title}
             </h1>
             {blog.ogImage?.asset?.url ? (
-              <div className="rounded-2xl border overflow-hidden">
+              <div className="rounded-2xl overflow-hidden flex items-center justify-center">
                 <Image
                   src={blog.ogImage.asset.url}
                   alt={blog.title || "Blog Image"}
-                  fill
-                  className="!relative"
+                  // fill
+                  width={1231}
+                  height={655}
+                  className="!relative rounded-2xl h-[655px]"
                 />
               </div>
             ) : (
@@ -329,13 +331,10 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
           </header>
 
           <div className="flex flex-col md:flex-row gap-2 md:gap-8 mx-auto">
-            {/* Blog Content */}
-            <article className="w-full md:w-3/4">
-              <PortableText value={blog.body} components={components} />
-            </article>
+            
 
             {/* Table of Content */}
-            <aside className="w-full md:w-1/4 min-w-[230px] md:sticky top-24 h-full ">
+            <aside className="w-full md:w-1/4 min-w-[230px] md:sticky top-24 h-full text-sm">
               {/* Mobile Dropdown */}
               {/* <div className="md:hidden relative my-4">
                 <button
@@ -383,14 +382,14 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                 )}
               </div> */}
 
-              <div className="border rounded-2xl border-[#575757] p-8">
-                <h2 className="hidden md:block font-[500] text-[36px] text-[#BEEEEC]">
+              <div className="border rounded-2xl border-[#575757] p-4">
+                <h2 className="hidden md:block font-[500] text-[36px] text-[#BEEEEC] font-leaguespartan">
                   In this blog post
                 </h2>
-                <ul className="hidden md:block space-y-2 font-actay">
+                <ul className="space-y-2 font-raleway overflow-y-auto max-h-80">
                   {blog.headingPairs?.map((pair, index) => (
                     <div key={index} className="flex gap-4 mt-4">
-                      <div className="w-[30px] h-[30px] aspect-square bg-[#00695F] rounded-full text-white font-raleway font-[400] flex justify-center items-center text-sm">
+                      <div className="w-[30px] h-[30px] aspect-square bg-[#00695F] rounded-full text-white font-raleway font-[400] flex justify-center items-center text-xs xl:text-sm">
                         {index + 1}
                       </div>
 
@@ -410,7 +409,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                             window.scrollTo({ top: y, behavior: "smooth" });
                           }
                         }}
-                        className={`text-[20px] font-[400] font-raleway hover:underline ${
+                        className={`text-[14px] xl:text-[16px] font-[400] font-raleway hover:underline ${
                           activeHeading === pair.h2Heading
                             ? "text-[#00695F] font-bold"
                             : "text-gray-300"
@@ -422,8 +421,16 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                   ))}
                 </ul>
               </div>
-
-              <div className="bg-[#C2F0EF] rounded-2xl p-8 mt-6">
+              <div>
+                {/* will add link of linkdin and twitter */}
+              </div>
+            </aside>
+            {/* Blog Content */}
+            <article className="w-full md:w-3/4">
+              <PortableText value={blog.body} components={components} />
+            </article>
+            <aside className="w-full md:w-1/4 min-w-[230px] md:sticky top-24 h-full text-sm">
+            <div className="bg-[#C2F0EF] rounded-2xl p-6">
                 <h1 className="font-[500] text-[26px] font-leaguespartan text-[#002320] tracking-tight">
                   Web3 Data Expertise
                 </h1>
@@ -441,15 +448,6 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
               </div>
             </aside>
           </div>
-
-          {/* <div className="flex items-center justify-center">
-            <button
-              onClick={() => router.push("/blog")}
-              className="bg-white rounded-full my-16 px-4 sm:px-6 lg:px-8 py-3 lg:py-4 text-black mx-auto text-xs sm:text-sm lg:text-base"
-            >
-              Go Back to blog Page
-            </button>
-          </div> */}
         </article>
       </main>
       <FooterMain />
