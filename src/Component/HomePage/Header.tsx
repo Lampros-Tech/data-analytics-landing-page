@@ -5,7 +5,7 @@ import logo from "@/assets/images/Homepage/Logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiX } from "react-icons/hi";
 import { RiMenu4Fill } from "react-icons/ri";
 
 const Header = () => {
@@ -174,7 +174,7 @@ const Header = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      <div className="mx-4 3xl:max-w-[1600px] 3xl:mx-auto">
+      <div className="mx-4 3xl:max-w-[1600px] 3xl:mx-auto mt-2">
         <div className={`flex items-center justify-between rounded-2xl px-6 py-6 ${scrolled ? "bg-[#101010]/50 backdrop-blur-md" : "bg-transparent"
           }`}>
           <Link href="/" onClick={() => setActiveTab("Home")} className="flex-shrink-0 w-fit">
