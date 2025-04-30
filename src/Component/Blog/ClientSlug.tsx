@@ -11,6 +11,8 @@ import Link from "next/link";
 import { PortableTextBlock } from "@portabletext/types";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { FaLinkedin, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 
 // --- Type Definitions ---
 export type Blog = {
@@ -49,6 +51,43 @@ export type Blog = {
 interface ClientSlugProps {
   blog: Blog;
 }
+
+// Add this component before the main ClientSlug component
+const ShareButtons = ({ title, url }: { title: string; url: string }) => {
+  const encodedTitle = encodeURIComponent(title);
+  const encodedUrl = encodeURIComponent(url);
+
+  const shareLinks = {
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`
+  };
+
+  return (
+    <div className="flex items-center gap-4 mt-2 bg-[#141414] rounded-xl py-3 px-4 sticky bottom-4 z-10">
+      <span className="text-white font-raleway font-[600] text-[20px]">Share on:</span>
+      <div className="flex gap-3">
+        <a
+          href={shareLinks.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-[#CAFCFA] transition-colors duration-300 p-2.5 rounded-full"
+          aria-label="Share on LinkedIn"
+        >
+          <FaLinkedinIn className="text-[#154E4D] text-sm" />
+        </a>
+        <a
+          href={shareLinks.twitter}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-[#CAFCFA] transition-colors duration-300 p-2.5 rounded-full"
+          aria-label="Share on Twitter"
+        >
+          <FaXTwitter className="text-[#154E4D] text-sm" />
+        </a>
+      </div>
+    </div>
+  );
+};
 
 // --- Component ---
 export default function ClientSlug({ blog }: ClientSlugProps) {
@@ -334,59 +373,12 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
             
 
             {/* Table of Content */}
-            <aside className="w-full md:w-1/4 min-w-[230px] md:sticky top-24 h-full text-sm">
-              {/* Mobile Dropdown */}
-              {/* <div className="md:hidden relative my-4">
-                <button
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="w-full flex justify-between items-center px-4 py-2 bg-[#141313] text-white rounded-lg border border-[#5F5F5F] text-xs font-actayWide"
-                >
-                  Table Of Content
-                  <span
-                    className={`transform transition ${isOpen ? "rotate-180" : ""}`}
-                  >
-                  </span>
-                </button>
-
-                {isOpen && (
-                  <ul className="absolute w-full bg-[#141313] text-white rounded-lg border border-[#5F5F5F] mt-2 shadow-lg z-10 text-xs font-actay">
-                    {blog.headingPairs?.map((pair, index) => (
-                      <li key={index} className="py-2 px-2">
-                        <a
-                          href={`#${pair.h2Heading}`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            const targetElement = document.getElementById(
-                              pair.h2Heading
-                            );
-                            if (targetElement) {
-                              const yOffset = -160;
-                              const y =
-                                targetElement.getBoundingClientRect().top +
-                                window.scrollY +
-                                yOffset;
-                              window.scrollTo({ top: y, behavior: "smooth" });
-                            }
-                          }}
-                          className={`text-xs hover:underline ${
-                            activeHeading === pair.h2Heading
-                              ? "text-green-400 font-bold"
-                              : "text-gray-300"
-                          }`}
-                        >
-                          [ {index + 1} ] {pair.displayHeading}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div> */}
-
-              <div className="border rounded-2xl border-[#575757] p-4">
+            <aside className="w-full md:w-1/4 min-w-[230px] md:sticky top-24 h-full text-sm flex flex-col overflow-y-auto max-h-[500px]" >
+              <div className="border rounded-2xl border-[#575757] p-4 flex-1 overflow-y-auto">
                 <h2 className="hidden md:block font-[500] text-[36px] text-[#BEEEEC] font-leaguespartan">
                   In this blog post
                 </h2>
-                <ul className="space-y-2 font-raleway overflow-y-auto max-h-80">
+                <ul className="space-y-2 font-raleway ">
                   {blog.headingPairs?.map((pair, index) => (
                     <div key={index} className="flex gap-4 mt-4">
                       <div className="w-[30px] h-[30px] aspect-square bg-[#00695F] rounded-full text-white font-raleway font-[400] flex justify-center items-center text-xs xl:text-sm">
@@ -421,8 +413,11 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                   ))}
                 </ul>
               </div>
-              <div>
-                {/* will add link of linkdin and twitter */}
+              <div className="mt-4">
+                <ShareButtons 
+                  title={blog.title} 
+                  url={typeof window !== 'undefined' ? window.location.href : ''} 
+                />
               </div>
             </aside>
             {/* Blog Content */}
@@ -448,6 +443,12 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
               </div>
             </aside>
           </div>
+          {/* <div className="mt-8">
+            <ShareButtons 
+              title={blog.title} 
+              url={typeof window !== 'undefined' ? window.location.href : ''} 
+            />
+          </div> */}
         </article>
       </main>
       <FooterMain />
