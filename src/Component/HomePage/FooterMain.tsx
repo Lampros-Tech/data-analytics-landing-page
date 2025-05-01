@@ -6,7 +6,6 @@ import Typography from '../UI/Typography';
 import styles from "../../styles/Homepage.module.css"
 import footer from '@/assets/images/Homepage/footer.svg'
 import socialLinks from '@/data/socialLinks';
-import FormComponent from './FormComponent';
 
 
 const navigationLinks = [

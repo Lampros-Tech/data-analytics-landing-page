@@ -16,7 +16,7 @@ const Header = () => {
   const [activeTabWidth, setActiveTabWidth] = useState(0);
   const [activeTabLeft, setActiveTabLeft] = useState(0);
   const tabRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-  const [scrolled, setScrolled] = useState(false);
+  // const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,16 +35,16 @@ const Header = () => {
     scrollTo?: string;
   }
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrolled(window.scrollY > 10);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
