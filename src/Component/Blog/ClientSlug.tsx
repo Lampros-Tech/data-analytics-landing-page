@@ -1,5 +1,5 @@
 "use client";
-
+import React, { ReactNode } from 'react'; 
 import Image from "next/image";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { useEffect, useState } from "react";
@@ -273,14 +273,23 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
       },
       h2: ({ children }) => {
         // Extract text content from children
-        const getTextContent = (children: any): string => {
-          if (typeof children === "string") return children;
-          if (Array.isArray(children)) {
-            return children.map((child) => getTextContent(child)).join("");
+        const getTextContent = (node: ReactNode): string => {
+          if (typeof node === "string") {
+            return node;
           }
-          if (children && typeof children === "object") {
-            return getTextContent(children.props?.children);
+          if (typeof node === 'number') { // Handle numbers if they might appear
+             return String(node);
           }
+          if (Array.isArray(node)) {
+            return node.map(getTextContent).join("");
+          }
+          // Check if it's a valid React element and has children prop
+          if (React.isValidElement(node) && node.props && typeof node.props === 'object' && 'children' in node.props) {
+             // Recursively call getTextContent on the element's children
+             // Ensure node.props.children is treated as ReactNode for the recursive call
+             return getTextContent(node.props.children as ReactNode);
+          }
+          // Handle null, undefined, boolean, fragments without text
           return "";
         };
 
