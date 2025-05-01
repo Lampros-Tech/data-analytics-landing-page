@@ -11,10 +11,11 @@ import FooterMain from "../HomePage/FooterMain";
 import { PortableTextBlock } from "@portabletext/types";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import {  FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Button from "../UI/button";
 import FormComponent from "../HomePage/FormComponent";
+import { IoIosArrowDown } from "react-icons/io";
 
 // --- Type Definitions ---
 export type Blog = {
@@ -96,7 +97,7 @@ const ShareButtons = ({ title, url }: { title: string; url: string }) => {
 // --- Component ---
 export default function ClientSlug({ blog }: ClientSlugProps) {
   const [activeHeading, setActiveHeading] = useState("");
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -148,7 +149,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
       ),
       blockquote: ({ value }) => (
         <div className="my-8 border-l-4 border-[#7DDEDA] pl-6 py-2">
-          <blockquote className="text-lg italic text-[#B7B7B7] font-raleway">
+          <blockquote className="text-base lg:text-lg italic text-[#B7B7B7] font-raleway">
             {value.text}
           </blockquote>
           {(value.author || value.source) && (
@@ -180,7 +181,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         </div>
       ),
       table: ({ value }) => (
-        <div className="overflow-x-auto my-6 w-[70%] border overflow-hidden border-[#7D7D7D] rounded-b-2xl rounded-t-2xl">
+        <div className="overflow-x-auto my-6 xl:w-[70%] border overflow-hidden border-[#7D7D7D] rounded-b-2xl rounded-t-2xl">
           <table className="w-full overflow-hidden rounded-2xl border-collapse border border-[#7D7D7D] text-left font-leaguespartan text-white">
             {value.rows && value.rows.length > 0 && (
               <>
@@ -246,12 +247,12 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
     },
     list: {
       bullet: ({ children }) => (
-        <ul className="list-disc pl-6 my-2 font-raleway font-[300] text-[18px] text-white">
+        <ul className="list-disc pl-6 my-2 font-raleway font-[300] text-base lg:text-[18px] text-white">
           {children}
         </ul>
       ),
       number: ({ children }) => (
-        <ol className="list-decimal pl-6 my-2 font-raleway font-[300] text-[18px] text-white">
+        <ol className="list-decimal pl-6 my-2 font-raleway font-[300] text-base lg:text-[18px] text-white">
           {children}
         </ol>
       ),
@@ -264,22 +265,32 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h1
             id={text}
-            className="font-leaguespartan text-[34px] font-[400] mt-6 mb-4 text-[#7DDEDA]"
+            className="font-leaguespartan text-[32px] lg:text-[34px] font-[400] mt-6 mb-4 text-[#7DDEDA]"
           >
             {text}
           </h1>
         );
       },
       h2: ({ children }) => {
-        const text = Array.isArray(children)
-          ? (children[0] as string)
-          : (children as string);
+        // Extract text content from children
+        const getTextContent = (children: any): string => {
+          if (typeof children === "string") return children;
+          if (Array.isArray(children)) {
+            return children.map((child) => getTextContent(child)).join("");
+          }
+          if (children && typeof children === "object") {
+            return getTextContent(children.props?.children);
+          }
+          return "";
+        };
+
+        const text = getTextContent(children);
         return (
           <h2
             id={text}
-            className="font-leaguespartan text-[34px] font-[400] mt-10 mb-4 text-[#7DDEDA]"
+            className="font-leaguespartan text-[32px] lg:text-[34px] font-[400] mt-10 mb-4 text-[#7DDEDA]"
           >
-            {text}
+            {children}
           </h2>
         );
       },
@@ -290,7 +301,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h3
             id={text}
-            className="font-leaguespartan text-[34px] font-[400] mt-4 text-white"
+            className="font-leaguespartan text-[32px] lg:text-[34px] font-[400] mt-4 text-white"
           >
             {text}
           </h3>
@@ -303,7 +314,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h4
             id={text}
-            className="font-leaguespartan text-[34px] font-[400] mt-4 text-white"
+            className="font-leaguespartan text-[32px] lg:text-[34px] font-[400] mt-4 text-white"
           >
             {text}
           </h4>
@@ -316,7 +327,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h5
             id={text}
-            className="font-leaguespartan text-[34px] font-[400] mt-4 text-white"
+            className="font-leaguespartan text-[32px] lg:text-[34px] font-[400] mt-4 text-white"
           >
             {text}
           </h5>
@@ -329,14 +340,16 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h6
             id={text}
-            className="font-leaguespartan text-[34px] font-[400] mt-4 text-white"
+            className="font-leaguespartan text-[32px] lg:text-[34px] font-[400] mt-4 text-white"
           >
             {text}
           </h6>
         );
       },
       normal: ({ children }) => (
-        <p className="my-2 text-lg text-white font-raleway">{children}</p>
+        <p className="my-2 text-base lg:text-lg text-white font-raleway">
+          {children}
+        </p>
       ),
     },
   };
@@ -358,7 +371,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
               <LuDot />
               {blog.readTime} min read
             </div>
-            <h1 className="font-leaguespartan font-[200] text-[64px] leading-[80px] text-[#7DDEDA] tracking-tighter text-center mt-4 mb-6 mx-auto max-w-[1600px]">
+            <h1 className="font-leaguespartan font-[200] text-[46px] md:text-[64px] leading-[80px] text-[#7DDEDA] tracking-tighter text-left md:text-center mt-4 mb-6 mx-auto max-w-[1600px]">
               {blog.title}
             </h1>
             {blog.ogImage?.asset?.url ? (
@@ -369,7 +382,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                   // fill
                   width={1600}
                   height={450}
-                  className="!relative rounded-2xl h-[450px]"
+                  className="!relative rounded-2xl h-[200px] sm:h-[250px] md:h-[450px]"
                 />
               </div>
             ) : (
@@ -379,47 +392,77 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
             )}
           </header>
 
-          <div className="flex flex-col md:flex-row gap-2 md:gap-8 mx-auto max-w-[1600px]">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-8 mx-auto max-w-[1600px]">
             {/* Table of Content */}
-            <aside className="w-full md:w-1/4 min-w-[270px] md:sticky top-24 h-full text-sm flex flex-col max-h-[500px] ">
+            <aside className="w-full lg:w-1/4 min-w-[270px] lg:sticky top-24 h-full text-sm flex flex-col max-h-[500px] ">
               <div className="border rounded-2xl border-[#575757] px-4 py-6 flex-1">
-                <h2 className="hidden md:block font-[500] text-[36px] text-[#BEEEEC] tracking-tight font-leaguespartan">
+                {/* Mobile Dropdown Header */}
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="w-full flex items-center justify-between lg:hidden"
+                >
+                  <h2 className="font-[500] text-[24px] text-[#BEEEEC] tracking-tight font-leaguespartan">
+                    In this blog post
+                  </h2>
+                  <IoIosArrowDown
+                    className={`text-[#BEEEEC] text-2xl transition-transform duration-300 ${
+                      isDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Desktop Title */}
+                <h2 className="hidden lg:block font-[500] text-[36px] text-[#BEEEEC] tracking-tight font-leaguespartan">
                   In this blog post
                 </h2>
-                <ul className="space-y-2 font-raleway ">
-                  {blog.headingPairs?.map((pair, index) => (
-                    <div key={index} className="flex gap-2 mt-4">
-                      <div className="w-[30px] h-[30px] aspect-square bg-[#00695F] rounded-full text-white font-raleway font-[400] flex justify-center items-center text-xs xl:text-sm">
-                        {index + 1}
-                      </div>
 
-                      <a
-                        href={`#${pair.h2Heading}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          const targetElement = document.getElementById(
-                            pair.h2Heading
-                          );
-                          if (targetElement) {
-                            const yOffset = -160;
-                            const y =
-                              targetElement.getBoundingClientRect().top +
-                              window.scrollY +
-                              yOffset;
-                            window.scrollTo({ top: y, behavior: "smooth" });
-                          }
-                        }}
-                        className={`text-[14px] xl:text-[16px] font-[400] font-raleway hover:underline ${
-                          activeHeading === pair.h2Heading
-                            ? "text-[#00695F] font-bold"
-                            : "text-gray-300"
-                        }`}
-                      >
-                        {pair.displayHeading}
-                      </a>
-                    </div>
-                  ))}
-                </ul>
+                {/* Content */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isDropdownOpen
+                      ? "max-h-[1000px] opacity-100"
+                      : "max-h-0 opacity-0 lg:max-h-none lg:opacity-100"
+                  }`}
+                >
+                  <ul className="space-y-2 font-raleway mt-4">
+                    {blog.headingPairs?.map((pair, index) => (
+                      <div key={index} className="flex gap-2 mt-4">
+                        <div className="w-[30px] h-[30px] aspect-square bg-[#00695F] rounded-full text-white font-raleway font-[400] flex justify-center items-center text-xs xl:text-sm">
+                          {index + 1}
+                        </div>
+
+                        <a
+                          href={`#${pair.h2Heading}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+
+                            const targetElement = document.getElementById(
+                              pair.h2Heading
+                            );
+
+                            if (targetElement) {
+                              const yOffset = -160;
+                              const y =
+                                targetElement.getBoundingClientRect().top +
+                                window.pageYOffset +
+                                yOffset;
+                              window.scrollTo({ top: y, behavior: "smooth" });
+                              setIsDropdownOpen(false);
+                            } else {
+                            }
+                          }}
+                          className={`text-[14px] xl:text-[16px] font-[400] font-raleway hover:underline ${
+                            activeHeading === pair.h2Heading
+                              ? "text-[#00695F] font-bold"
+                              : "text-gray-300"
+                          }`}
+                        >
+                          {pair.displayHeading}
+                        </a>
+                      </div>
+                    ))}
+                  </ul>
+                </div>
               </div>
               <div className="mt-4">
                 <ShareButtons
@@ -431,10 +474,10 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
               </div>
             </aside>
             {/* Blog Content */}
-            <article className="w-full md:w-3/4 ">
+            <article className="w-full lg:w-3/4 ">
               <PortableText value={blog.body} components={components} />
             </article>
-            <aside className="w-full md:w-1/4 min-w-[280px] md:sticky top-24 h-full text-sm">
+            <aside className="w-full lg:w-1/4 min-w-[280px] lg:sticky top-24 h-full text-sm">
               <div className="bg-[#C2F0EF] rounded-2xl px-4 py-6">
                 <h1 className="font-[500] text-[26px] font-leaguespartan text-[#002320] tracking-tight">
                   Web3 Data Expertise
@@ -458,14 +501,8 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
               </div>
             </aside>
           </div>
-          {/* <div className="mt-8">
-            <ShareButtons 
-              title={blog.title} 
-              url={typeof window !== 'undefined' ? window.location.href : ''} 
-            />
-          </div> */}
         </article>
-        <FormComponent/>
+        <FormComponent />
       </main>
       <FooterMain />
     </div>
