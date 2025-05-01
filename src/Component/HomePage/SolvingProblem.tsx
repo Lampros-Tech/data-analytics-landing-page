@@ -20,13 +20,13 @@ const SolutionCard: React.FC<solutionProps> = ({ title, description }) => (
 
 const SolvingProblem = () => {
   return (
-    <div>
+    <div className="3xl:max-w-[1600px] 3xl:mx-auto">
       <div className="text-center mb-4">
         <Typography variant="h2" color="primary" className={`mx-2 md:mx-4 mb-4 font-leaguespartan`}>
           Solving the Hardest Problems in <br /> Blockchain Data Analytics
         </Typography>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full mx-2 md:mx-4 3xl:max-w-[1600px] 3xl:mx-auto mb-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full mx-2 md:mx-4 mb-14">
         {solutions.map((solution, index) => (
           <SolutionCard
             key={index}

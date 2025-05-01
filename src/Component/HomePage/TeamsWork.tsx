@@ -40,7 +40,7 @@ const Benefit: React.FC<BenefitProps> = ({ title, description }) => (
 const TeamsWork = () => {
   return (
     <section className="py-16">
-      <div className="">
+      <div className="3xl:max-w-[1600px] 3xl:mx-auto">
         {/* Teams Work Section */}
         <div className="text-center mb-4">
           <Typography color="primary" variant="h2" className={`font-leaguespartan mx-2 md:mx-4`}>
@@ -51,7 +51,7 @@ const TeamsWork = () => {
           </Typography> */}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full 3xl:max-w-[1600px] 3xl:mx-auto mx-2 md:mx-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-full  mx-2 md:mx-4 mb-4">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -75,7 +75,9 @@ const TeamsWork = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-[#7DDEDA] py-10 md:py-12 px-6 md:px-8 text-center">
+        
+      </div>
+      <div className="bg-[#7DDEDA] py-10 md:py-12 px-6 md:px-8 text-center">
           <Typography variant="h4" color='black' className={`font-leaguespartan mb-8 md:mb-4 leading-[45px]`}>
             Already building something big? Let&apos;s talk about how to get your data in sync.
           </Typography>
@@ -84,7 +86,6 @@ const TeamsWork = () => {
             Talk to an Expert
           </Button>
         </div>
-      </div>
     </section>
   );
 };

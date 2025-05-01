@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import Header from "../HomePage/Header";
 import { LuDot } from "react-icons/lu";
 import FooterMain from "../HomePage/FooterMain";
-import Link from "next/link";
+// import Link from "next/link";
 import { PortableTextBlock } from "@portabletext/types";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { FaLinkedin, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {  FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import Button from "../UI/button";
+import FormComponent from "../HomePage/FormComponent";
 
 // --- Type Definitions ---
 export type Blog = {
@@ -59,12 +61,14 @@ const ShareButtons = ({ title, url }: { title: string; url: string }) => {
 
   const shareLinks = {
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-    twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`
+    twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
   };
 
   return (
     <div className="flex items-center gap-4 mt-2 bg-[#141414] rounded-xl py-3 px-4 sticky bottom-4 z-10">
-      <span className="text-white font-raleway font-[600] text-[20px]">Share on:</span>
+      <span className="text-white font-raleway font-[600] text-[20px]">
+        Share on:
+      </span>
       <div className="flex gap-3">
         <a
           href={shareLinks.linkedin}
@@ -94,26 +98,26 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
   const [activeHeading, setActiveHeading] = useState("");
   // const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(() => {
-      const handleScroll = () => {
-        const headings = document.querySelectorAll("h2");
-        let currentActive = "";
+  useEffect(() => {
+    const handleScroll = () => {
+      const headings = document.querySelectorAll("h2");
+      let currentActive = "";
 
-        for (let i = 0; i < headings.length; i++) {
-          const rect = headings[i].getBoundingClientRect();
-          if (rect.top <= 500) {
-            currentActive = headings[i].innerText;
-          } else {
-            break;
-          }
+      for (let i = 0; i < headings.length; i++) {
+        const rect = headings[i].getBoundingClientRect();
+        if (rect.top <= 500) {
+          currentActive = headings[i].innerText;
+        } else {
+          break;
         }
+      }
 
-        setActiveHeading(currentActive);
-      };
+      setActiveHeading(currentActive);
+    };
 
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const components: PortableTextComponents = {
     types: {
@@ -149,7 +153,9 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
           </blockquote>
           {(value.author || value.source) && (
             <div className="mt-2 text-sm text-[#7DDEDA]">
-              {value.author && <span className="font-bold">{value.author}</span>}
+              {value.author && (
+                <span className="font-bold">{value.author}</span>
+              )}
               {value.author && value.source && <span> — </span>}
               {value.source && <span>{value.source}</span>}
             </div>
@@ -191,18 +197,20 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                   </tr>
                 </thead>
                 <tbody>
-                  {value.rows.slice(1).map((row: { cells: string[] }, rowIndex: number) => (
-                    <tr key={rowIndex} className="text-[18px] font-[300]">
-                      {row.cells.map((cell: string, cellIndex: number) => (
-                        <td
-                          key={cellIndex}
-                          className="border border-[#7D7D7D] px-6 py-4"
-                        >
-                          {cell}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
+                  {value.rows
+                    .slice(1)
+                    .map((row: { cells: string[] }, rowIndex: number) => (
+                      <tr key={rowIndex} className="text-[18px] font-[300]">
+                        {row.cells.map((cell: string, cellIndex: number) => (
+                          <td
+                            key={cellIndex}
+                            className="border border-[#7D7D7D] px-4 py-2"
+                          >
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
                 </tbody>
               </>
             )}
@@ -217,9 +225,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
     },
     marks: {
       strong: ({ children }) => (
-        <strong className="font-bold font-raleway">
-          {children}
-        </strong>
+        <strong className="font-bold font-raleway mb-10">{children}</strong>
       ),
       em: ({ children }) => <em className="italic">{children}</em>,
       code: ({ children }) => (
@@ -232,7 +238,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
           href={value?.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#7DDEDA] underline"
+          className="text-white underline"
         >
           {children}
         </a>
@@ -240,10 +246,14 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
     },
     list: {
       bullet: ({ children }) => (
-        <ul className="list-disc pl-6 my-2 font-raleway font-[300] text-[18px] text-white">{children}</ul>
+        <ul className="list-disc pl-6 my-2 font-raleway font-[300] text-[18px] text-white">
+          {children}
+        </ul>
       ),
       number: ({ children }) => (
-        <ol className="list-decimal pl-6 my-2 font-raleway font-[300] text-[18px] text-white">{children}</ol>
+        <ol className="list-decimal pl-6 my-2 font-raleway font-[300] text-[18px] text-white">
+          {children}
+        </ol>
       ),
     },
     block: {
@@ -254,7 +264,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h1
             id={text}
-            className="font-leaguespartan text-2xl sm:text-3xl xl:text-4xl 2xl:text-5xl font-[400] mt-6 mb-4 text-[#7DDEDA]"
+            className="font-leaguespartan text-[34px] font-[400] mt-6 mb-4 text-[#7DDEDA]"
           >
             {text}
           </h1>
@@ -267,7 +277,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h2
             id={text}
-            className="font-leaguespartan text-xl sm:text-2xl xl:text-3xl 2xl:text-4xl font-[400] mt-10 mb-4 text-[#7DDEDA]"
+            className="font-leaguespartan text-[34px] font-[400] mt-10 mb-4 text-[#7DDEDA]"
           >
             {text}
           </h2>
@@ -280,7 +290,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h3
             id={text}
-            className="font-leaguespartan text-sm sm:text-lg xl:text-xl 2xl:text-2xl font-[300] mt-4 text-white"
+            className="font-leaguespartan text-[34px] font-[400] mt-4 text-white"
           >
             {text}
           </h3>
@@ -293,7 +303,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h4
             id={text}
-            className="font-leaguespartan text-xs sm:text-sm xl:text-lg 2xl:text-xl font-[300] mt-4 text-white"
+            className="font-leaguespartan text-[34px] font-[400] mt-4 text-white"
           >
             {text}
           </h4>
@@ -306,7 +316,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h5
             id={text}
-            className="font-leaguespartan text-[10px] sm:text-xs xl:text-sm 2xl:text-lg font-[300] mt-4 text-white"
+            className="font-leaguespartan text-[34px] font-[400] mt-4 text-white"
           >
             {text}
           </h5>
@@ -319,16 +329,14 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
         return (
           <h6
             id={text}
-            className="font-leaguespartan text-[10px] sm:text-xs xl:text-sm 2xl:text-lg font-[300] mt-4 text-white"
+            className="font-leaguespartan text-[34px] font-[400] mt-4 text-white"
           >
             {text}
           </h6>
         );
       },
       normal: ({ children }) => (
-        <p className="my-2 text-xs sm:text-sm xl:text-base 2xl:text-lg text-white font-raleway">
-          {children}
-        </p>
+        <p className="my-2 text-lg text-white font-raleway">{children}</p>
       ),
     },
   };
@@ -336,19 +344,21 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
   return (
     <div className="relative bg-[#101010] min-h-screen">
       <Header />
-      <main className="min-h-screen w-[95%] max-w-[1600px] mx-auto py-28 relative z-40">
-        <article>
+      <main className="min-h-screen w-[95%] max-w-[1600px] mx-auto pt-28  relative z-40">
+        <article className="mb-14">
           <header className="mb-3 lg:mb-12 ">
-            <div className="font-[300] text-[24px] font-leaguespartan text-white flex justify-center items-center mt-6">
+            <div className="font-[300] text-[14px] font-leaguespartan text-white flex justify-center items-center mt-6">
               Updated{" "}
-              {blog.publishedAt && new Date(blog.publishedAt).toLocaleDateString("en-US", {
-                month: "short",
-                day: "2-digit",
-                year: "numeric",
-              })}{" "}
-              <LuDot />{blog.readTime}  {" "}min read
+              {blog.publishedAt &&
+                new Date(blog.publishedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+                })}{" "}
+              <LuDot />
+              {blog.readTime} min read
             </div>
-            <h1 className="font-leaguespartan font-[200] text-[72px] leading-[80px] text-[#7DDEDA] tracking-tighter text-center mt-4 mb-6">
+            <h1 className="font-leaguespartan font-[200] text-[64px] leading-[80px] text-[#7DDEDA] tracking-tighter text-center mt-4 mb-6 mx-auto max-w-[1600px]">
               {blog.title}
             </h1>
             {blog.ogImage?.asset?.url ? (
@@ -357,9 +367,9 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                   src={blog.ogImage.asset.url}
                   alt={blog.title || "Blog Image"}
                   // fill
-                  width={1231}
-                  height={655}
-                  className="!relative rounded-2xl h-[655px]"
+                  width={1600}
+                  height={450}
+                  className="!relative rounded-2xl h-[450px]"
                 />
               </div>
             ) : (
@@ -369,18 +379,16 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
             )}
           </header>
 
-          <div className="flex flex-col md:flex-row gap-2 md:gap-8 mx-auto">
-            
-
+          <div className="flex flex-col md:flex-row gap-2 md:gap-8 mx-auto max-w-[1600px]">
             {/* Table of Content */}
-            <aside className="w-full md:w-1/4 min-w-[230px] md:sticky top-24 h-full text-sm flex flex-col overflow-y-auto max-h-[500px]" >
-              <div className="border rounded-2xl border-[#575757] p-4 flex-1 overflow-y-auto">
-                <h2 className="hidden md:block font-[500] text-[36px] text-[#BEEEEC] font-leaguespartan">
+            <aside className="w-full md:w-1/4 min-w-[270px] md:sticky top-24 h-full text-sm flex flex-col max-h-[500px] ">
+              <div className="border rounded-2xl border-[#575757] px-4 py-6 flex-1">
+                <h2 className="hidden md:block font-[500] text-[36px] text-[#BEEEEC] tracking-tight font-leaguespartan">
                   In this blog post
                 </h2>
                 <ul className="space-y-2 font-raleway ">
                   {blog.headingPairs?.map((pair, index) => (
-                    <div key={index} className="flex gap-4 mt-4">
+                    <div key={index} className="flex gap-2 mt-4">
                       <div className="w-[30px] h-[30px] aspect-square bg-[#00695F] rounded-full text-white font-raleway font-[400] flex justify-center items-center text-xs xl:text-sm">
                         {index + 1}
                       </div>
@@ -414,18 +422,20 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                 </ul>
               </div>
               <div className="mt-4">
-                <ShareButtons 
-                  title={blog.title} 
-                  url={typeof window !== 'undefined' ? window.location.href : ''} 
+                <ShareButtons
+                  title={blog.title}
+                  url={
+                    typeof window !== "undefined" ? window.location.href : ""
+                  }
                 />
               </div>
             </aside>
             {/* Blog Content */}
-            <article className="w-full md:w-3/4">
+            <article className="w-full md:w-3/4 ">
               <PortableText value={blog.body} components={components} />
             </article>
-            <aside className="w-full md:w-1/4 min-w-[230px] md:sticky top-24 h-full text-sm">
-            <div className="bg-[#C2F0EF] rounded-2xl p-6">
+            <aside className="w-full md:w-1/4 min-w-[280px] md:sticky top-24 h-full text-sm">
+              <div className="bg-[#C2F0EF] rounded-2xl px-4 py-6">
                 <h1 className="font-[500] text-[26px] font-leaguespartan text-[#002320] tracking-tight">
                   Web3 Data Expertise
                 </h1>
@@ -433,13 +443,18 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
                   Talk to our analytics experts and discover the power of your
                   data.
                 </p>
-                <Link
-                  href="https://calendly.com/harshil_lamprostech/pick-mutual-availability"
-                  target="_blank"
-                  className="font-[500] text-[26px] font-leaguespartan text-[#00695F] mt-4 cursor-pointer underline tracking-tight"
+                <Button
+                  variant="secondary"
+                  className="text-[14px] sm:text-[16px] lg:text-[20px] mt-4"
+                  onClick={() =>
+                    window.open(
+                      "https://calendly.com/harshil_lamprostech/pick-mutual-availability",
+                      "_blank"
+                    )
+                  }
                 >
-                  Book a Discovery Call
-                </Link>
+                  Talk to an Expert
+                </Button>
               </div>
             </aside>
           </div>
@@ -450,6 +465,7 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
             />
           </div> */}
         </article>
+        <FormComponent/>
       </main>
       <FooterMain />
     </div>

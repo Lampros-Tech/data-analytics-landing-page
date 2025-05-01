@@ -8,12 +8,13 @@ import Button from "../UI/button";
 import component from "@/assets/images/CaseStudy/AnalyticComponent.svg";
 import component2 from "@/assets/images/CaseStudy/casestudy1.svg";
 import FooterMain from "../HomePage/FooterMain";
+import FormComponent from "../HomePage/FormComponent";
 
 const CaseStudyMain = () => {
   return (
     <div className="relative bg-[#101010] min-h-screen">
       <Header />
-      <div className="ml-10 mr-14 3xl:max-w-[1600px] 3xl:mx-auto pt-[130px] pb-14">
+      <div className="ml-10 mr-14 3xl:max-w-[1600px] 3xl:mx-auto pt-[130px]">
         <div className="relative border border-[#575757] py-8 px-10 rounded-2xl mb-14">
           <h1 className="text-[#7DDEDA] font-[300] text-[64px] font-leaguespartan tracking-tight leading-[70px]">
             Illuminate LayerZero Growth:
@@ -200,7 +201,7 @@ const CaseStudyMain = () => {
             </div>
           ))}
         </div>
-        <div className="bg-[#7DDEDA] rounded-2xl relative flex items-center flex-col py-8 gap-4 mt-14">
+        <div className="bg-[#7DDEDA] rounded-2xl relative flex items-center flex-col py-8 gap-4 my-14">
           <Image src={component} alt="" className="absolute left-0 top-0 bottom-0 rounded-2xl h-[182px]" />
           <p className="font-[700] text-[24px] font-raleway text-[#154E4D] ">
             Take the Next Step with Our Expert Analytics Service.
@@ -218,6 +219,7 @@ const CaseStudyMain = () => {
             Talk to one of our experts today
           </Button>
         </div>
+        <FormComponent/>
       </div>
       <FooterMain/>
     </div>

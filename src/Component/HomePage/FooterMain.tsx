@@ -71,10 +71,10 @@ const FooterMain = () => {
     const currentYear = new Date().getFullYear();
   return (
     <>
-      <div className='mb-14'>
+      {/* <div className='mb-14'>
         <FormComponent/>
-      </div>
-       <section className="w-full bg-gradient-to-b from-[#DEF7F7] to-[#7DDEDA] py-10 relative">
+      </div> */}
+       <section className="w-full bg-gradient-to-b from-[#DEF7F7] to-[#7DDEDA] py-10 relative mt-14">
         <div className="container mx-auto px-4 md:px-16">
           <div className="flex justify-between items-center gap-10 md:gap-8">
             <NavigationLinks />

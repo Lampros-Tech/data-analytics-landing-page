@@ -28,8 +28,8 @@ const WorksCard = ({ icon: Icon, title }: worksProps) => {
 const WhyItWorks = () => {
 
     return (
-        <>
-            <div className='flex flex-col xl:flex-row gap-2 mx-2 md:mx-4 3xl:max-w-[1600px] 3xl:mx-auto'>
+        <div className="3xl:max-w-[1600px] 3xl:mx-auto">
+            <div className='flex flex-col xl:flex-row gap-2 mx-2 md:mx-4 '>
                 <div className='flex-1/3 1xl:flex-1/4 bg-[#00695F] rounded-2xl flex flex-col justify-between items-center pt-8 pb-10 relative min-h-[320px]'>
                     <Typography variant="title" color="white" className={`font-leaguespartan z-10 tracking-tight`}>
                         Why It <br className='sm:hidden xl:block' /> Works
@@ -62,7 +62,7 @@ const WhyItWorks = () => {
                     <Image src={Dashboard} alt='dashboard' className='h-full w-auto' />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -42,9 +42,9 @@ export default function BlogPostSkeleton() {
             {/* Table of Contents */}
             <aside className="w-full md:w-1/4">
               <div className="sticky top-32">
-                <h2 className="hidden md:block font-[500] text-[36px] text-[#BEEEEC] mb-6">
+                {/* <h2 className="hidden md:block font-[500] text-[36px] text-[#BEEEEC] mb-6">
                   In this blog post
-                </h2>
+                </h2> */}
                 <div className="hidden md:block space-y-4">
                   {[...Array(5)].map((_, index) => (
                     <div key={index} className="flex gap-4 items-center">

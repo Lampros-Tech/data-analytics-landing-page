@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { HiX } from "react-icons/hi";
 import { RiMenu4Fill } from "react-icons/ri";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState("Home");
@@ -175,9 +176,14 @@ const Header = () => {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       <div className="mx-4 3xl:max-w-[1600px] 3xl:mx-auto mt-2">
-        <div className={`flex items-center justify-between rounded-2xl px-6 py-6 ${scrolled ? "bg-[#101010]/50 backdrop-blur-md" : "bg-transparent"
-          }`}>
-          <Link href="/" onClick={() => setActiveTab("Home")} className="flex-shrink-0 w-fit">
+        <div
+          className={`flex items-center justify-between rounded-2xl px-6 py-4 bg-[#1C1C1C]/90`}
+        >
+          <Link
+            href="/"
+            onClick={() => setActiveTab("Home")}
+            className="flex-shrink-0"
+          >
             <Image src={logo} alt="logo" className="w-36 md:w-48" />
           </Link>
 
@@ -188,10 +194,10 @@ const Header = () => {
             <RiMenu4Fill size={32} className="text-[#7DDEDA]" />
           </button>
 
-          <div className="hidden xl:flex items-center w-full justify-center">
-            <div className="relative -translate-x-[72px] md:-translate-x-[96px] flex items-center bg-[#154E4D] rounded-full p-2">
+          <div className="hidden xl:flex items-center justify-center">
+            <div className="relative flex items-center rounded-full p-2">
               <div
-                className="absolute h-[80%] transition-all duration-300 ease-in-out bg-[#7DDEDA] rounded-full"
+                className="absolute h-[80%] transition-all duration-300 ease-in-out "
                 style={{
                   left: `${activeTabLeft}px`,
                   width: `${activeTabWidth}px`,
@@ -210,13 +216,16 @@ const Header = () => {
                     <div ref={dropdownRef} className="relative">
                       <button
                         onClick={() => handleNavClick(item)}
-                        className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full cursor-pointer ${styles.raleway
-                          } ${activeTab === item.name
-                            ? "text-[#154E4D] font-medium"
+                        className={`relative z-10 px-6 py-1.5 font-[300] text-[24px] transition-colors duration-300 rounded-full cursor-pointer flex items-center gap-2 ${
+                          styles.raleway
+                        } ${
+                          activeTab === item.name
+                            ? "text-[#154E4D] "
                             : "text-[#7DDEDA]"
-                          }`}
+                        }`}
                       >
                         {item.name}
+                        <IoIosArrowDown className="text-[20px]" />
                       </button>
 
                       {isAboutDropdownOpen && (
@@ -227,7 +236,7 @@ const Header = () => {
                               href={dropdownItem.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className={`block px-4 py-3 text-base text-gray-300 hover:bg-[#7DDEDA]/10 hover:text-white transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl ${styles.raleway}`}
+                              className={`block px-4 py-3 font-[300] text-[24px] text-gray-300 hover:bg-[#7DDEDA]/10 hover:text-white transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl font-raleway`}
                             >
                               {dropdownItem.name}
                             </a>
@@ -241,11 +250,13 @@ const Header = () => {
                       onClick={(e) => handleNavClick(item, e)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${styles.raleway
-                        } ${activeTab === item.name
+                      className={`relative z-10 px-6 py-1.5  text-[24px] transition-colors duration-300 rounded-full ${
+                        styles.raleway
+                      } ${
+                        activeTab === item.name
                           ? "text-[#154E4D] font-medium"
-                          : "text-[#7DDEDA]"
-                        }`}
+                          : "text-[#7DDEDA] font-[300]"
+                      }`}
                     >
                       {item.name}
                     </a>
@@ -253,11 +264,13 @@ const Header = () => {
                     <Link
                       href={item.href}
                       onClick={(e) => handleNavClick(item, e)}
-                      className={`relative z-10 px-6 py-1.5 text-base transition-colors duration-300 rounded-full ${styles.raleway
-                        } ${activeTab === item.name
-                          ? "text-[#154E4D] font-medium"
-                          : "text-[#7DDEDA]"
-                        }`}
+                      className={`relative z-10 px-6 py-1.5  text-[24px] transition-colors duration-300 rounded-full ${
+                        styles.raleway
+                      } ${
+                        activeTab === item.name
+                          ? "text-[#00695F] font-medium"
+                          : "text-[#7DDEDA] font-[300]"
+                      }`}
                     >
                       {item.name}
                     </Link>
@@ -307,7 +320,9 @@ const Header = () => {
                       `}
                     >
                       {item.name}
-                      <span className={`ml-2 transition-transform ${isAboutDropdownOpen ? "rotate-180" : ""}`}>
+                      <span
+                        className={`ml-2 transition-transform ${isAboutDropdownOpen ? "rotate-180" : ""}`}
+                      >
                         ▼
                       </span>
                     </button>

@@ -20,7 +20,7 @@ const WorksCard = ({ title, description }: WorksCardProps) => (
 
 const Works = () => {
   return (
-    <div>
+    <div className="3xl:max-w-[1600px] 3xl:mx-auto">
       <div className="rounded-xl bg-[#00695F] py-8 md:py-10 px-4 md:px-16 mx-2 md:mx-4 3xl:max-w-[1600px] 3xl:mx-auto flex flex-col sm:flex-row md:gap-8 gap-6">
         <div className="flex-1">
           <Typography variant="h2" color="white" className={`max-w-xl font-leaguespartan tracking-tighter`}>

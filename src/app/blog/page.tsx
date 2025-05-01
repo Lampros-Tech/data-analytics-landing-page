@@ -6,6 +6,7 @@ import Head from "next/head";
 import { SearchProvider } from "@/app/context/SearchContext";
 import { client } from "@/lib/sanity";
 import type { Metadata } from "next";
+import FormComponent from "@/Component/HomePage/FormComponent";
 
 export const metadata: Metadata = {
   title: "Blog | Lampros Tech",
@@ -112,6 +113,7 @@ export default async function blogs() {
        <div className="mx-4 3xl:max-w-[1600px] 3xl:mx-auto pt-16 mb-16">
         <BlogHeader />
         <BlogList />
+      <FormComponent/>
       </div>
       <FooterMain/>
       </div>
