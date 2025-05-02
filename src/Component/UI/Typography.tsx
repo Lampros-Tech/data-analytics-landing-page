@@ -48,7 +48,7 @@ const Typography: React.FC<TypographyProps> = ({
     h5: "text-[1.5rem] font-[500]",
     h6: "text-[1.5rem] md:text-[2.25rem] font-[500]",
     h7: "text-[1.5rem] md:text-[2rem] font-[500]",
-    h8: "text-[2.25rem] font-[400]",
+    h8: "text-[1.5rem] md:text-[2rem] xl:text-[2.25rem] font-[400]",
     body1: "text-[1rem] md:text-[1.05rem] lg:text-[1.125rem] leading-relaxed",
     body2: "text-[0.875rem] md:text-[1.25rem] ",
     caption: "text-[0.875rem] leading-normal",
