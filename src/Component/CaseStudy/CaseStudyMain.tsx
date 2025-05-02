@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Header from "../HomePage/Header";
-import Typography from "../UI/Typography";
 import { teamStruggle, approach, engagement, network, gainValue } from "../../data/teamStruggle";
 import Image from "next/image";
 import Button from "../UI/button";

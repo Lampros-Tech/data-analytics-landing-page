@@ -180,49 +180,52 @@ export default function ClientSlug({ blog }: ClientSlugProps) {
           </SyntaxHighlighter>
         </div>
       ),
-      table: ({ value }) => (
-        <div className="overflow-x-auto my-6 xl:w-[70%] border overflow-hidden border-[#7D7D7D] rounded-b-2xl rounded-t-2xl">
-          <table className="w-full overflow-hidden rounded-2xl border-collapse border border-[#7D7D7D] text-left font-leaguespartan text-white">
-            {value.rows && value.rows.length > 0 && (
-              <>
-                <thead className="bg-[#048C80] text-[24px]">
-                  <tr className="text-center">
-                    {value.rows[0].cells.map((cell: string, index: number) => (
-                      <th
-                        key={index}
-                        className="border border-[#7D7D7D] px-2 py-2 font-[400] text-center"
-                      >
-                        {cell}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {value.rows
-                    .slice(1)
-                    .map((row: { cells: string[] }, rowIndex: number) => (
+      table: ({ value }) => {
+        // Get the maximum number of cells in any column
+        const maxCells = Math.max(...(value.columns?.map((col: { cells: string[] }) => col.cells?.length || 0) || [0]));
+        
+        return (
+          <div className="overflow-x-auto my-6 xl:w-[70%] border overflow-hidden border-[#7D7D7D] rounded-b-2xl rounded-t-2xl">
+            <table className="w-full overflow-hidden rounded-2xl border-collapse border border-[#7D7D7D] text-left font-leaguespartan text-white">
+              {value.columns && value.columns.length > 0 && (
+                <>
+                  <thead className="bg-[#048C80] text-[24px]">
+                    <tr className="text-center">
+                      {value.columns.map((column: { header: string }, index: number) => (
+                        <th
+                          key={index}
+                          className="border border-[#7D7D7D] px-2 py-2 font-[400] text-center"
+                        >
+                          {column.header}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Array.from({ length: maxCells }).map((_, rowIndex) => (
                       <tr key={rowIndex} className="text-[18px] font-[300]">
-                        {row.cells.map((cell: string, cellIndex: number) => (
+                        {value.columns.map((column: { cells: string[] }, colIndex: number) => (
                           <td
-                            key={cellIndex}
+                            key={colIndex}
                             className="border border-[#7D7D7D] px-4 py-2"
                           >
-                            {cell}
+                            {column.cells[rowIndex] || ''}
                           </td>
                         ))}
                       </tr>
                     ))}
-                </tbody>
-              </>
-            )}
-            {(!value.rows || value.rows.length === 0) && (
-              <tr>
-                <td className="px-6 py-4 text-center">No data available</td>
-              </tr>
-            )}
-          </table>
-        </div>
-      ),
+                  </tbody>
+                </>
+              )}
+              {(!value.columns || value.columns.length === 0) && (
+                <tr>
+                  <td className="px-6 py-4 text-center">No data available</td>
+                </tr>
+              )}
+            </table>
+          </div>
+        );
+      },
     },
     marks: {
       strong: ({ children }) => (

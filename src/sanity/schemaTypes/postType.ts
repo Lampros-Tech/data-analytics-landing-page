@@ -165,43 +165,52 @@ export const postType = defineType({
           type: 'object',
           fields: [
             defineField({
-              name: 'rows',
-              title: 'Rows',
+              name: 'columns',
+              title: 'Columns',
               type: 'array',
               of: [
                 defineArrayMember({
                   type: 'object',
                   fields: [
                     defineField({
+                      name: 'header',
+                      title: 'Column Header',
+                      type: 'string',
+                      validation: Rule => Rule.required(),
+                    }),
+                    defineField({
                       name: 'cells',
-                      title: 'Cells',
+                      title: 'Column Cells',
                       type: 'array',
                       of: [{ type: 'string' }],
-                      validation: Rule => Rule.required().max(3).error('Maximum 3 columns allowed'),
+                      validation: Rule => Rule.required(),
                     }),
                   ],
                   preview: {
                     select: {
+                      header: 'header',
                       cells: 'cells',
                     },
-                    prepare({ cells }) {
+                    prepare({ header, cells }) {
                       return {
-                        title: cells ? cells.join(' | ') : 'Empty Row',
+                        title: header || 'Column',
+                        subtitle: cells ? `${cells.length} cells` : 'No cells',
                       }
                     },
                   },
                 }),
               ],
+              validation: Rule => Rule.required().min(1).max(3).error('Maximum 3 columns allowed'),
             }),
           ],
           preview: {
             select: {
-              rows: 'rows',
+              columns: 'columns',
             },
-            prepare({ rows }) {
-              const rowCount = rows?.length || 0;
+            prepare({ columns }) {
+              const columnCount = columns?.length || 0;
               return {
-                title: `📊 Table (${rowCount} rows)`,
+                title: `📊 Table (${columnCount} columns)`,
               };
             },
           },
