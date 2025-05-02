@@ -5,7 +5,7 @@ import Typography from "../UI/Typography";
 import { teamStruggle, approach, engagement , network, gainValue} from "../../data/teamStruggle";
 import Image from "next/image";
 import Button from "../UI/button";
-import component from "@/assets/images/CaseStudy/AnalyticComponent.svg";
+import component from "@/assets/images/CaseStudy/caseStudyPhone.svg";
 import component2 from "@/assets/images/CaseStudy/casestudy1.svg";
 import FooterMain from "../HomePage/FooterMain";
 import FormComponent from "../HomePage/FormComponent";
@@ -14,23 +14,32 @@ const CaseStudyMain = () => {
   return (
     <div className="relative bg-[#101010] min-h-screen">
       <Header />
-      <div className="ml-10 mr-14 3xl:max-w-[1600px] 3xl:mx-auto pt-[130px]">
-        <div className="relative border border-[#575757] py-8 px-10 rounded-2xl mb-14">
-          <h1 className="text-[#7DDEDA] font-[300] text-[64px] font-leaguespartan tracking-tight leading-[70px]">
+      <div className="mx-4 3xl:max-w-[1600px] 3xl:mx-auto pt-[130px]">
+        <div className="relative border border-[#575757] py-10 px-6 md:py-8 md:px-10 rounded-2xl mb-14">
+          <h1 className="text-[#7DDEDA] max-w-[300px] 1xs:max-w-[330px] sm:max-w-[500px] md:max-w-[600px]  font-[300] text-[46px] md:text-[55px] xl:text-[64px] font-leaguespartan tracking-tight leading-[50px] z-10 md:leading-[60px] xl:leading-[70px]">
             Illuminate LayerZero Growth:
-            <br /> Understand User Behavior
-            <br /> Across the Expanding <br />
+             Understand User Behavior
+            Across the Expanding 
             Ecosystem
           </h1>
           <Image
             src={component2}
             alt=""
-            className="absolute top-0 bottom-0 right-0 w-[392px]"
+            className="absolute top-0 bottom-0 right-0 hidden xl:block w-[392px] rounded-2xl"
+          />
+          <Image
+            src={component}
+            alt=""
+            width={160}
+            className="absolute top-0 bottom-0 right-0 xl:hidden w-[140px] xs:w-[150px] 1xs:w-[160px] md:w-[250px] lg:w-[300px] rounded-2xl"
           />
         </div>
-        <Typography variant="h7" color="primary" className="font-leaguespartan mb-2">
+        <div className="flex gap-4 xl:gap-16 flex-col lg:flex-row mb-14">
+        <article className="w-full lg:ml-8">
+        {/* <Typography variant="h7" color="primary" className="font-leaguespartan mb-2">
           The Challenge: Making Sense of User Behavior in a Cross-Chain World
-        </Typography>
+        </Typography> */}
+        <h1 className="text-[#7DDEDA] font-[400] text-[28px] md:text-[30px] xl:text-[32px] font-leaguespartan mb-2">The Challenge: Making Sense of User Behavior in a Cross-Chain World</h1>
         <Typography variant="body1" className="mb-3 font-raleway font-[400]">
           LayerZero has emerged as a powerful protocol enabling seamless
           cross-chain messaging. Its rapid integration across blockchains like
@@ -80,7 +89,7 @@ const CaseStudyMain = () => {
           <span className="font-[700]">10+ integrated networks</span>,
           including:
         </p>
-        <div className="grid grid-cols-5 gap-8 w-[80%] mt-6">
+        <div className="grid grid-cols-4 gap-8 w-[80%] mt-6">
         {network.map((item,index)=>(
 <div key={index} className="flex items-center gap-2 ">
   <Image src={item.logo} alt=""/>
@@ -97,10 +106,10 @@ const CaseStudyMain = () => {
           {approach.map((item, index) => (
             <div
               key={index}
-              className="bg-[#242424] text-white rounded-lg font-raleway font-[400] text-[20px] max-w-[550px] min-w-[530px] py-2.5 flex items-center gap-6"
+              className="bg-[#242424] text-white rounded-lg font-raleway font-[400] text-[20px] lg:min-w-[400px] px-6 py-4 flex items-center gap-6"
             >
               {/* {item.title} */}
-              <div className="bg-[#7DDEDA] rounded-full aspect-square size-[35px] flex justify-center items-center ml-20"><Image src={item.image} alt=""/></div>
+              <div className="bg-[#7DDEDA] rounded-full aspect-square size-[35px] flex justify-center items-center "><Image src={item.image} alt=""/></div>
               {item.title}
             </div>
           ))}
@@ -122,7 +131,7 @@ const CaseStudyMain = () => {
         <h3 className="text-white font-[500] text-[28px] font-raleway mt-8">
           Top four networks for engagement:
         </h3>
-        <div className="flex gap-2 mt-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2 w-fit">
           {engagement.map((item, index) => (
             <div
               key={index}
@@ -144,13 +153,13 @@ const CaseStudyMain = () => {
         <p className="font-[500] text-[28px] font-raleway text-white mt-8">
           Behavioral shift in asset transfers
         </p>
-        <div className="text-white font-raleway flex gap-4 mt-2 w-full">
-          <div className="bg-[#002523] rounded-xl py-6 p-12 flex-1 font-[400] text-[20px]">
+        <div className="text-white font-raleway flex gap-4 mt-2 w-fit">
+          <div className="bg-[#002523] rounded-xl py-6 p-12 flex-1 font-[400] text-[20px] max-w-[400px]">
             Early usage was dominated by{" "}
             <span className="font-[700]">ERC-20 token transfers</span>{" "}
             (stablecoins, protocol tokens)
           </div>
-          <div className="bg-[#002523] rounded-xl py-6 px-12 flex-1 font-[400] text-[20px]">
+          <div className="bg-[#002523] rounded-xl py-6 px-12 flex-1 font-[400] text-[20px] max-w-[400px]">
             Since mid-2022, native token bridging has become the dominant mode,
             indicating a growing user preference for simpler, direct transfers
           </div>
@@ -158,13 +167,13 @@ const CaseStudyMain = () => {
         <p className="font-[500] text-[28px] font-raleway text-white mt-8">
         Usage breakdown by transfer type
         </p>
-        <div className="text-white font-raleway flex gap-4 mt-2 w-full">
-          <div className="bg-[#002523] rounded-xl py-4 pl-12 pr-12 font-[400] text-[20px] flex-1">
+        <div className="text-white font-raleway flex gap-4 mt-2 w-fit">
+          <div className="bg-[#002523] rounded-xl py-4 pl-12 pr-12 font-[400] text-[20px] flex-1 max-w-[400px]">
             <span className="font-[700]">14M+ unique users </span>
             <br />
             engaged in native token transfers
           </div>
-          <div className="bg-[#002523] rounded-xl py-4 pl-12 pr-12 font-[400] text-[20px] flex-1">
+          <div className="bg-[#002523] rounded-xl py-4 pl-12 pr-12 font-[400] text-[20px] flex-1 max-w-[400px]">
             <span className="font-[700]">11.6M+ unique users </span>
             <br />
             used ERC-20 token transfers
@@ -190,18 +199,18 @@ const CaseStudyMain = () => {
         <p className="font-[700] text-[24px] font-raleway text-white mt-8">
           Working with Lampros Tech means you gain:
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-fit mt-2">
           {gainValue.map((item, index) => (
             <div
               key={index}
-              className="bg-[#1A1A1A] gap-8 text-white rounded-2xl font-raleway font-[400] text-[20px] p-8 flex items-center "
+              className="bg-[#1A1A1A] gap-8 text-white rounded-2xl font-raleway font-[400] text-[20px] p-8 flex items-start max-w-[400px]"
             >
               <Image src={item.image} alt="" className=""/>
               <p className="font-[400] text-[20px] font-raleway text-white">{item.title}</p>
             </div>
           ))}
         </div>
-        <div className="bg-[#7DDEDA] rounded-2xl relative flex items-center flex-col py-8 gap-4 my-14">
+        {/* <div className="bg-[#7DDEDA] rounded-2xl relative flex items-center flex-col py-8 gap-4 my-14">
           <Image src={component} alt="" className="absolute left-0 top-0 bottom-0 rounded-2xl h-[182px]" />
           <p className="font-[700] text-[24px] font-raleway text-[#154E4D] ">
             Take the Next Step with Our Expert Analytics Service.
@@ -218,6 +227,26 @@ const CaseStudyMain = () => {
           >
             Talk to one of our experts today
           </Button>
+        </div> */}
+      
+        </article>
+        <aside className="w-full lg:w-[420px] xl:w-[450px]">
+        <div className="sticky top-[120px] bg-[#7DDEDA] rounded-2xl px-4 xl:px-8 py-10">
+          <p className="font-raleway text-[20px] font-[400] text-[#424952]">Take the Next Step with Our Expert Analytics Service.</p>
+          <Button
+            variant="secondary"
+            className="text-[20px] mt-10"
+            onClick={() =>
+              window.open(
+                "https://calendly.com/harshil_lamprostech/pick-mutual-availability",
+                "_blank"
+              )
+            }
+          >
+            Talk to an Expert
+          </Button>
+        </div>
+        </aside>
         </div>
         <FormComponent/>
       </div>

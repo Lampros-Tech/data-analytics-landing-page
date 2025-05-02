@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-xs: 400px;
+  --breakpoint-1xs: 500px;
   --breakpoint-3xl: 1600px;
   --breakpoint-1xl: 1400px;
   --font-raleway: "Raleway", sans-serif;
